@@ -13,7 +13,7 @@ if(isset($_SESSION['pid'])) {
   $pid = $_SESSION['pid'];
 } else {
   // If the session variable is not set, redirect to login or show an error
-  echo "<script>alert('Session expired or user not logged in'); window.location='index.php';</script>";
+  echo "<script>alert('Registration Sucessfull!'); window.location='index.php';</script>";
   exit();
 }
   
@@ -68,7 +68,7 @@ if(isset($_POST['app-submit']))
       }
     }
     else{
-      echo "<script>alert('Select a time or date in the future!');</script>";
+      echo "<script>alert('Select future time or date!');</script>";
     }
   }
   else{
