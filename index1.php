@@ -30,7 +30,7 @@ include("header.php");
 }
 
   </style>
-  <body style="background: -webkit-linear-gradient(left, #A1BE95, #F98866); background-size: cover;">
+  <body style="background: -webkit-linear-gradient(left,#522258,#D95F59); background-size: cover;">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" >
     <div class="container">
 
@@ -41,15 +41,15 @@ include("header.php");
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" style="margin-right: 40px;">
-            <a class="nav-link js-scroll-trigger" href="index.php" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6>HOME</h6></a>
+            <a class="nav-link js-scroll-trigger" href="index.php" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6 class="focus">HOME</h6></a>
           </li>
   
           <li class="nav-item" style="margin-right: 40px;">
-            <a class="nav-link js-scroll-trigger" href="services.html" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6>ABOUT US</h6></a>
+            <a class="nav-link js-scroll-trigger" href="services.html" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6 class="focus">ABOUT US</h6></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="contact.html" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6>CONTACT</h6></a>
+            <a class="nav-link js-scroll-trigger" href="contact.html" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6 class="focus">CONTACT</h6></a>
           </li>
         </ul>
       </div>
@@ -65,23 +65,23 @@ include("header.php");
 
          <div class="col-md-7" style="padding-left: 180px; ">
                  <div style="-webkit-animation: mover 2s infinite alternate;
-    animation: mover 1s infinite alternate; margin-top: 16%; right: 10%">
-          <img style="width:200px; height: 200px;" src="assets/images/ACPS.png" alt="ACPS logo"/>
+    animation: mover 1s infinite alternate; width: 30%;padding-left: 0px;margin-top: 150px;margin-left: 45px;margin-bottom:15px">
+          <img style="width:200px; height: 200px;" src="assets/images/apcs8.png" alt="ACPS logo"/>
       </div>
 
       <div style="color: white;">
-            <h4 style="font-family: 'IBM Plex Sans', sans-serif;"> We are here for you!</h4>
+            <h4 style="font-family: 'IBM Plex Sans', sans-serif;">Caring for You, Anytime, Anywhere.</h4>
           </div>
 
          </div>
 
          <div class="col-md-4" style="margin-top: 5%;right: 8%; ">
-          <div class="card" style="font-family: 'IBM Plex Sans', sans-serif; background:-webkit-linear-gradient(left,rgb(160, 180, 152),rgb(241, 137, 105));">
+          <div class="card" style="font-family: 'IBM Plex Sans', sans-serif; background: lightgrey;">
             <div class="card-body" >
               <center>
                 <i class="fa fa-hospital-o fa-3x" aria-hidden="true" style="color:#0062cc; border: none; "></i>
                 <br>
-              <h3 style="margin-top: 10%; color:#262626">Patient Login</h3><br>
+              <h3 style="margin-top: 10%; color:#522258">Patient Login</h3><br>
               <form class="form-group" method="POST" action="func.php">
                 <div class="row" style="margin-top: 10%">
                   <div class="col-md-4" style="color:#262626"><label>Email-ID: </label></div>
@@ -104,7 +104,7 @@ include("header.php");
                                                         border-bottom-left-radius: 27% 40%;
                                                         border-top-right-radius: 27% 40%;
                                                         border-bottom-right-radius: 27% 40%; "
-                        id="inputbtn" name="patsub" value="Login" class="btn btn-primary"></center></div>           
+                        id="inputbtn" name="patsub" value="Login" class="btnRegister"></center></div>           
                  <!--  <div class="col-md-8" style="margin-top: 10%">
                     <a href="index.php" class="btn btn-primary">Back</a></div> -->
                 </div>

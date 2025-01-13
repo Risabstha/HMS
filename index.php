@@ -59,15 +59,15 @@ function checklen()
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" style="margin-right: 40px;">
-            <a class="nav-link js-scroll-trigger" href="index.php" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6>HOME</h6></a>
+            <a class="nav-link js-scroll-trigger" href="index.php" style="font-family: 'IBM Plex Sans', sans-serif;"><h6 class="focus">HOME</h6></a>
           </li>
   
           <li class="nav-item" style="margin-right: 40px;">
-            <a class="nav-link js-scroll-trigger" href="services.html" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6>ABOUT US</h6></a>
+            <a class="nav-link js-scroll-trigger" href="services.html" style="font-family: 'IBM Plex Sans', sans-serif;"><h6 class="focus">ABOUT US</h6></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="contact.html" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6>CONTACT</h6></a>
+            <a class="nav-link js-scroll-trigger" href="contact.html" style="font-family: 'IBM Plex Sans', sans-serif;"><h6 class="focus">CONTACT</h6></a>
           </li>
         </ul>
       </div>
@@ -78,9 +78,9 @@ function checklen()
 
 <div class="container register" style="font-family: 'IBM Plex Sans', sans-serif;">
                 <div class="row">
-                    <div class="col-md-3 register-left" style="margin-top: 3%; right: 10%">
-                        <img style="width:200px; height: 200px;" src="assets/images/ACPS.png" alt="ACPS logo"/>
-                        <h3>Welcome</h3>
+                    <div class="col-md-3 register-left" style="margin-top: 11%; right: 12%">
+                        <img style="width:200px; height: 200px;" src="assets/images/apcs7.png" alt="ACPS logo"/>
+                        
                        
                     </div>
                     <div class="col-md-9 register-right" style="margin-top:40px; left: -60px;">
@@ -123,7 +123,7 @@ function checklen()
                                                     <span>Female </span> 
                                                 </label>
                                             </div>
-                                            <a href="index1.php">Already have an account?</a>
+                                            <a class="linke" href="index1.php">Already have an account?</a>
                                         </div>
                                     </div>
                                 

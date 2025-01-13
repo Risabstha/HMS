@@ -1,15 +1,25 @@
-body{
-    background: -webkit-linear-gradient(left, #A1BE95, #F98866);
-}
+
 
 html {
   overflow-y: scroll; 
 }
+
+.focus {
+    color: white;
+ 
+}
+
+.focus:hover {
+    color: #522258;
+ 
+}
+
+ 
 .contact-form{
     background: #ffffff;
     margin-top: 10%;
     margin-bottom: 5%;
-    width: 70%;
+    width: 70%; 
 }
 .contact-form .form-control{
     border-radius:1rem;
@@ -33,14 +43,14 @@ html {
     margin-bottom: 8%;
     margin-top: -13%;
     text-align: center;
-    color: #262626;
+    color: #522258  ;
 }
 .contact-form .btnContact {
     width: 50%;
     border: none;
     border-radius: 1rem;
     padding: 1.5%;
-    background: #0062cc;
+    background: #522258;
     font-weight: 600;
     color: #ffffff;
     cursor: pointer;
@@ -52,12 +62,18 @@ html {
     border-radius: 1rem;
     padding: 1.5%;
     color: #ffffff;
-    background-color: #0062cc;
+    background-color: #522258;
     border: none;
     cursor: pointer;
 }
 
 .btnContact{
-     
-     margin-left: 70%;
+     margin-left: 50%;
+}
+
+.btn-focus{
+    background-color: #522258;
+}
+.btn-focus:hover{
+    background-color: #D95F59;
 }

@@ -1,6 +1,15 @@
 body {
-    background: -webkit-linear-gradient(left, #A1BE95, #F98866);
+    background: -webkit-linear-gradient(left,#522258,#D95F59);
     background-size: cover;
+}
+
+.focus{
+    color:white;
+}
+
+.focus:hover{
+    color:#522258;
+    
 }
 
 .register{
@@ -26,7 +35,7 @@ body {
     cursor: pointer;
 }
 .register-right{
-    background: -webkit-linear-gradient(left, #A1BE95, #F98866);
+    background: lightgrey;
     /* opacity: 90%; */
     border-top-left-radius: 6% 10%;
     border-bottom-left-radius: 6% 10%;
@@ -65,16 +74,19 @@ body {
     border: none;
     border-radius: 1.5rem;
     padding: 2%;
-    background: #0062cc;
+    background: #522258;
     color: #ffffff;
     font-weight: 600;
     width: 50%;
     cursor: pointer;
 }
+.btnRegister:hover{
+    background-color: #D95F59;
+}
 .register .nav-tabs{
     margin-top: 3%;
     border: none;
-    background: #0062cc;
+    background: #522258;
     border-radius: 1.5rem;
     width: 28%;
     float: right;
@@ -92,8 +104,8 @@ body {
 }
 .register .nav-tabs .nav-link.active{
     width: 120px;
-    color: #0062cc;
-    border: 2px solid #0062cc;
+    color: #522258;
+    border: 2px solid #D95F59;
     border-top-left-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
 }
@@ -101,6 +113,13 @@ body {
     text-align: center;
     margin-top: 8%;
     margin-bottom: -15%;
-    color: #262626;
+    color: #522258;
 }
 
+.linke{
+    color: #522258;
+}
+.linke:hover{
+    color: #D95F59;
+    text-decoration: none;
+}
