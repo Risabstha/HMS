@@ -7,16 +7,12 @@ include("header.php");
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-
     <link rel="stylesheet" type="text/css" href="style2.css">
-
-
     
   </head>
   <style type="text/css">
@@ -31,6 +27,7 @@ include("header.php");
 
   </style>
   <body style="background: -webkit-linear-gradient(left, #3931af, #00c6ff); background-size: cover;">
+  <body style="background: -webkit-linear-gradient(left,#522258,#D95F59); background-size: cover;">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" >
     <div class="container">
 
@@ -47,7 +44,6 @@ include("header.php");
           <li class="nav-item" style="margin-right: 40px;">
             <a class="nav-link js-scroll-trigger" href="services.html" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6>ABOUT US</h6></a>
           </li>
-
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="contact.html" style="color: white;font-family: 'IBM Plex Sans', sans-serif;"><h6>CONTACT</h6></a>
           </li>
@@ -55,26 +51,23 @@ include("header.php");
       </div>
     </div>
   </nav> 
-
-
-
     <div class="container-fluid" style="margin-top:60px;margin-bottom:60px;color:#34495E;">
       <div class="row">
-
         
-
          <div class="col-md-7" style="padding-left: 180px; ">
                  <div style="-webkit-animation: mover 2s infinite alternate;
     animation: mover 1s infinite alternate;">
           <img src="images/ambulance1.png" alt="" style="width: 20%;padding-left: 40px;margin-top: 150px;margin-left: 45px;margin-bottom:15px">
+          <img src="images/apcs8.png" alt="logo of apcs" style="width: 30%;padding-left: 0px;margin-top: 150px;margin-left: 45px;margin-bottom:15px">
       </div>
 
       <div style="color: white;">
             <h4 style="font-family: 'IBM Plex Sans', sans-serif;"> We are here for you!</h4>
+      <div style="color: white">
+            <h4 style="font-family: 'IBM Plex Sans', sans-serif;"> Caring for You, Anytime, Anywhere.
           </div>
 
          </div>
-
          <div class="col-md-4" style="margin-top: 5%;right: 8%">
           <div class="card" style="font-family: 'IBM Plex Sans', sans-serif;">
             <div class="card-body">
@@ -100,15 +93,8 @@ include("header.php");
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
-
-
-
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
