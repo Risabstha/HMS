@@ -78,9 +78,9 @@ function checklen()
 
 <div class="container register" style="font-family: 'IBM Plex Sans', sans-serif;">
                 <div class="row">
-                    <div class="col-md-3 register-left" style="margin-top: 3%; right: 10%">
-                        <img style="width:200px; height: 200px;" src="assets/images/ACPS.png" alt="ACPS logo"/>
-                        <h3>Welcome</h3>
+                    <div class="col-md-3 register-left" style="margin-top:10%; right: 10%">
+                        <img style="width:200px; height: 200px;" src="assets/images/apcs8.png" alt="ACPS logo"/>
+                        <h3></h3>
                        
                     </div>
                     <div class="col-md-9 register-right" style="margin-top: 40px;left: -60px;">
