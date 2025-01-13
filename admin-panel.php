@@ -72,7 +72,7 @@ if(isset($_POST['app-submit']))
     }
   }
   else{
-      echo "<script>alert('Select a time or date in the future!');</script>";
+      echo "<script>alert('Select future time or date!');</script>";
   }
   
 }

@@ -99,7 +99,7 @@ var Calendar = function() {"use strict";
 				var originalEventObject = $(this).data('eventObject');
 
 				var $category = $(this).attr('data-class');
-				
+
 				// we need to copy it, so that multiple events don't have a reference to the same object
 
 				var newEvent = new Object;
@@ -204,7 +204,7 @@ var Calendar = function() {"use strict";
 				newEvent.end = new Date($('.form-full-event #end-date-time').val());
 				newEvent.category = $(".form-full-event .event-categories:checked").val();
 				newEvent.className = 'event-' + $(".form-full-event .event-categories:checked").val();
-				
+
 
 				if($(".form-full-event #event-id").val() !== "") {
 					el = $(".form-full-event #event-id").val();
@@ -222,7 +222,7 @@ var Calendar = function() {"use strict";
 
 					demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
 
-					
+
 
 				} else {
 
