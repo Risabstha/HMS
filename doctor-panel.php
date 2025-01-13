@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 <?php 
+if(session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 include('func1.php');
 $con=mysqli_connect("localhost","root","","myhmsdb");
-$doctor = $_SESSION['dname'];
+
+// $doctor = $_SESSION['dname'];
+if(isset($_SESSION['dname'])) {
+  $doctor = $_SESSION['dname'];
+} else {
+  // If the session variable is not set, redirect to login or show an error
+  echo "<script>alert('Session expired or user not logged in'); window.location='index.php';</script>";
+  exit();
+}
+
 if(isset($_GET['cancel']))
   {
     $query=mysqli_query($con,"update appointmenttb set doctorStatus='0' where ID = '".$_GET['ID']."'");
@@ -122,15 +134,18 @@ if(isset($_GET['cancel']))
                   <div class="panel panel-white no-radius text-center">
                     <div class="panel-body">
                       <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-list fa-stack-1x fa-inverse"></i> </span>
-                      <h4 class="StepTitle" style="margin-top: 5%;"> View Appointments</h4>
+                      <!-- <h4 class="StepTitle" style="margin-top: 5%;"> View Appointments</h4> -->
                       <script>
                         function clickDiv(id) {
                           document.querySelector(id).click();
                         }
                       </script>                      
                       <p class="links cl-effect-1">
-                        <a href="#list-app" onclick="clickDiv('#list-app-list')">
-                          Appointment List
+                        <a href="#list-app" style=" color: black; text-decoration: none;"   
+                                             onmouseover="this.style.color='red'" 
+                                             onmouseout="this.style.color='black'"
+                                              onclick="clickDiv('#list-app-list')">
+                                  <h4 class="StepTitle" style="margin-top: 5%;"> View Appointments</h4>
                         </a>
                       </p>
                     </div>
@@ -141,11 +156,14 @@ if(isset($_GET['cancel']))
                   <div class="panel panel-white no-radius text-center">
                     <div class="panel-body">
                       <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-list-ul fa-stack-1x fa-inverse"></i> </span>
-                      <h4 class="StepTitle" style="margin-top: 5%;"> Prescriptions</h4>
+                      <!-- <h4 class="StepTitle" style="margin-top: 5%;"> Prescriptions</h4> -->
                         
                       <p class="links cl-effect-1">
-                        <a href="#list-pres" onclick="clickDiv('#list-pres-list')">
-                          Prescription List
+                        <a href="#list-pres"  style=" color: black; text-decoration: none;"   
+                                             onmouseover="this.style.color='red'" 
+                                             onmouseout="this.style.color='black'" 
+                                             onclick="clickDiv('#list-pres-list')">
+                                 <h4 class="StepTitle" style="margin-top: 5%;"> Prescriptions</h4>
                         </a>
                       </p>
                     </div>

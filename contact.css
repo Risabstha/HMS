@@ -1,12 +1,12 @@
 body{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    background: -webkit-linear-gradient(left, #A1BE95, #F98866);
 }
 
 html {
   overflow-y: scroll; 
 }
 .contact-form{
-    background: #fff;
+    background: #ffffff;
     margin-top: 10%;
     margin-bottom: 5%;
     width: 70%;
@@ -33,7 +33,7 @@ html {
     margin-bottom: 8%;
     margin-top: -13%;
     text-align: center;
-    color: #495057;
+    color: #262626;
 }
 .contact-form .btnContact {
     width: 50%;
@@ -42,7 +42,7 @@ html {
     padding: 1.5%;
     background: #0062cc;
     font-weight: 600;
-    color: #fff;
+    color: #ffffff;
     cursor: pointer;
 
 }
@@ -51,7 +51,7 @@ html {
     width: 50%;
     border-radius: 1rem;
     padding: 1.5%;
-    color: #fff;
+    color: #ffffff;
     background-color: #0062cc;
     border: none;
     cursor: pointer;

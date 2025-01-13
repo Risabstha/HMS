@@ -157,15 +157,18 @@ if (isset($_POST['docsub1'])) {
                   <div class="panel panel-white no-radius text-center">
                     <div class="panel-body">
                       <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-users fa-stack-1x fa-inverse"></i> </span>
-                      <h4 class="StepTitle" style="margin-top: 5%;">Doctor List</h4>
+                      <!-- <h4 class="StepTitle" style="margin-top: 5%;">Doctor List</h4> -->
                       <script>
                         function clickDiv(id) {
                           document.querySelector(id).click();
                         }
                       </script>
                       <p class="links cl-effect-1">
-                        <a href="#list-doc" onclick="clickDiv('#list-doc-list')">
-                          View Doctors
+                        <a href="#list-doc" style=" color: black; text-decoration: none;"   
+                                             onmouseover="this.style.color='red'" 
+                                             onmouseout="this.style.color='black'" 
+                                              onclick="clickDiv('#list-doc-list')">
+                                  <h4 class="StepTitle" style="margin-top: 5%;">Doctor List</h4>
                         </a>
                       </p>
                     </div>
@@ -176,11 +179,14 @@ if (isset($_POST['docsub1'])) {
                   <div class="panel panel-white no-radius text-center">
                     <div class="panel-body">
                       <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-users fa-stack-1x fa-inverse"></i> </span>
-                      <h4 class="StepTitle" style="margin-top: 5%;">Patient List</h4>
+                      <!-- <h4 class="StepTitle" style="margin-top: 5%;">Patient List</h4> -->
 
                       <p class="cl-effect-1">
-                        <a href="#app-hist" onclick="clickDiv('#list-pat-list')">
-                          View Patients
+                        <a href="#app-hist" style=" color: black; text-decoration: none;"   
+                                             onmouseover="this.style.color='red'" 
+                                             onmouseout="this.style.color='black'" 
+                                             onclick="clickDiv('#list-pat-list')">
+                                 <h4 class="StepTitle" style="margin-top: 5%;">Patient List</h4>
                         </a>
                       </p>
                     </div>
@@ -192,11 +198,14 @@ if (isset($_POST['docsub1'])) {
                   <div class="panel panel-white no-radius text-center">
                     <div class="panel-body">
                       <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-paperclip fa-stack-1x fa-inverse"></i> </span>
-                      <h4 class="StepTitle" style="margin-top: 5%;">Appointment Details</h4>
+                      <!-- <h4 class="StepTitle" style="margin-top: 5%;">Appointment Details</h4> -->
 
                       <p class="cl-effect-1">
-                        <a href="#app-hist" onclick="clickDiv('#list-app-list')">
-                          View Appointments
+                        <a href="#app-hist" style=" color: black; text-decoration: none;"   
+                                             onmouseover="this.style.color='red'" 
+                                             onmouseout="this.style.color='black'"
+                                             onclick="clickDiv('#list-app-list')">
+                                  <h4 class="StepTitle" style="margin-top: 5%;">Appointment Details</h4>
                         </a>
                       </p>
                     </div>
@@ -209,11 +218,14 @@ if (isset($_POST['docsub1'])) {
                   <div class="panel panel-white no-radius text-center">
                     <div class="panel-body">
                       <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-list-ul fa-stack-1x fa-inverse"></i> </span>
-                      <h4 class="StepTitle" style="margin-top: 5%;">Prescription List</h4>
+                      <!-- <h4 class="StepTitle" style="margin-top: 5%;">Prescription List</h4> -->
 
                       <p class="cl-effect-1">
-                        <a href="#list-pres" onclick="clickDiv('#list-pres-list')">
-                          View Prescriptions
+                        <a href="#list-pres" style=" color: black; text-decoration: none;"   
+                                             onmouseover="this.style.color='red'" 
+                                             onmouseout="this.style.color='black'"
+                                              onclick="clickDiv('#list-pres-list')">
+                                <h4 class="StepTitle" style="margin-top: 5%;">Prescription List</h4>
                         </a>
                       </p>
                     </div>
@@ -228,9 +240,15 @@ if (isset($_POST['docsub1'])) {
                       <h4 class="StepTitle" style="margin-top: 5%;">Manage Doctors</h4>
 
                       <p class="cl-effect-1">
-                        <a href="#app-hist" onclick="clickDiv('#list-adoc-list')">Add Doctors</a>
+                        <a href="#app-hist" style=" color: blue; text-decoration: none;"   
+                                             onmouseover="this.style.color='red'" 
+                                             onmouseout="this.style.color='black'"
+                                              onclick="clickDiv('#list-adoc-list')">Add Doctors</a>
                         &nbsp|
-                        <a href="#app-hist" onclick="clickDiv('#list-ddoc-list')">
+                        <a href="#app-hist" style=" color: blue; text-decoration: none;"   
+                                             onmouseover="this.style.color='red'" 
+                                             onmouseout="this.style.color='black'"
+                                              onclick="clickDiv('#list-ddoc-list')">
                           Delete Doctors
                         </a>
                       </p>

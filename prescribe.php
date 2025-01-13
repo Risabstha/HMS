@@ -7,7 +7,20 @@ $appdate='';
 $apptime='';
 $fname = '';
 $lname= '';
-$doctor = $_SESSION['dname'];
+
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
+if (isset($_SESSION['dname'])) {
+    $doctor = $_SESSION['dname'];
+} else {
+    // Handle the case where dname is not set, e.g., redirect to login or show an error
+    echo "<script>alert('Session expired. Please log in again.');</script>";
+    header("Location: login.php");
+    exit();
+}
+
 if(isset($_GET['pid']) && isset($_GET['ID']) && ($_GET['appdate']) && isset($_GET['apptime']) && isset($_GET['fname']) && isset($_GET['lname'])) {
 $pid = $_GET['pid'];
   $ID = $_GET['ID'];
