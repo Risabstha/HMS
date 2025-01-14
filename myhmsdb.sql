@@ -223,7 +223,11 @@ ALTER TABLE `patreg`
 -- AUTO_INCREMENT for table `appointmenttb`
 --
 ALTER TABLE `appointmenttb`
+ALTER TABLE appointmenttb ADD COLUMN isNew BOOLEAN DEFAULT TRUE;
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+
+  
 
 --
 -- AUTO_INCREMENT for table `patreg`
@@ -235,3 +239,10 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- Add doctorStatus column to appointmenttb
+ALTER TABLE appointmenttb ADD COLUMN doctorStatus INT DEFAULT 1;
+
+-- Add foreign keys to prestb
+ALTER TABLE prestb 
+ADD CONSTRAINT fk_pres_pid FOREIGN KEY (pid) REFERENCES patienttb(ID),
+ADD CONSTRAINT fk_pres_appointment FOREIGN KEY (ID) REFERENCES appointmenttb(ID);

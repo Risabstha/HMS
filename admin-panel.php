@@ -85,7 +85,7 @@ function generate_bill(){
   $output='';
   $query=mysqli_query($con,"select p.pid,p.ID,p.fname,p.lname,p.doctor,p.appdate,p.apptime,p.disease,p.allergy,p.prescription,a.docFees from prestb p inner join appointmenttb a on p.ID=a.ID and p.pid = '$pid' and p.ID = '".$_GET['ID']."'");
   while($row = mysqli_fetch_array($query)){
-    $output .= '
+    $output .= ' 
     <label> Patient ID : </label>'.$row["pid"].'<br/><br/>
     <label> Appointment ID : </label>'.$row["ID"].'<br/><br/>
     <label> Patient Name : </label>'.$row["fname"].' '.$row["lname"].'<br/><br/>
@@ -96,6 +96,7 @@ function generate_bill(){
     <label> Allergies : </label>'.$row["allergy"].'<br/><br/>
     <label> Prescription : </label>'.$row["prescription"].'<br/><br/>
     <label> Fees Paid : </label>'.$row["docFees"].'<br/>
+   
     
     ';
 
@@ -108,6 +109,7 @@ function generate_bill(){
 if(isset($_GET["generate_bill"])){
   require_once("TCPDF/tcpdf.php");
   $obj_pdf = new TCPDF('P',PDF_UNIT,PDF_PAGE_FORMAT,true,'UTF-8',false);
+
   $obj_pdf -> SetCreator(PDF_CREATOR);
   $obj_pdf -> SetTitle("Generate Bill");
   $obj_pdf -> SetHeaderData('','',PDF_HEADER_TITLE,PDF_HEADER_STRING);
@@ -115,7 +117,7 @@ if(isset($_GET["generate_bill"])){
   $obj_pdf -> SetFooterFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
   $obj_pdf -> SetDefaultMonospacedFont('helvetica');
   $obj_pdf -> SetFooterMargin(PDF_MARGIN_FOOTER);
-  $obj_pdf -> SetMargins(PDF_MARGIN_LEFT,'5',PDF_MARGIN_RIGHT);
+  $obj_pdf -> SetMargins(PDF_MARGIN_LEFT,'95',PDF_MARGIN_RIGHT);
   $obj_pdf -> SetPrintHeader(false);
   $obj_pdf -> SetPrintFooter(false);
   $obj_pdf -> SetAutoPageBreak(TRUE, 10);
@@ -126,7 +128,7 @@ if(isset($_GET["generate_bill"])){
 
   $content .= '
       <br/>
-      <h2 align ="center"> Global Hospitals</h2></br>
+      <h2 align ="center"> advanced patient care solution</h2></br>
       <h3 align ="center"> Bill</h3>
       
 
@@ -484,38 +486,42 @@ function get_specs(){
                         <td><?php echo $row['appdate'];?></td>
                         <td><?php echo $row['apptime'];?></td>
                         
-                          <td>
-                    <?php if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
-                    {
-                      echo "Active";
-                    }
-                    if(($row['userStatus']==0) && ($row['doctorStatus']==1))  
-                    {
-                      echo "Cancelled by You";
-                    }
-
-                    if(($row['userStatus']==1) && ($row['doctorStatus']==0))  
-                    {
-                      echo "Cancelled by Doctor";
-                    }
-                        ?></td>
-
                         <td>
-                        <?php if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
-                        { ?>
+                        <?php 
+if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 1)) {
+    echo "Active";
+} elseif (($row['userStatus'] == 0) && ($row['doctorStatus'] == 1)) {
+    echo "Cancelled by You";
+} elseif (($row['userStatus'] == 1) && ($row['doctorStatus'] == 0)) {
+    echo "Cancelled by Doctor";
+} elseif (($row['doctorStatus'] == 2)) {
+    echo "Accepted by Doctor";
+} else {
+    echo "Pending";
+}
+?>
+</td>
 
-													
-	                        <a href="admin-panel.php?ID=<?php echo $row['ID']?>&cancel=update" 
-                              onClick="return confirm('Are you sure you want to cancel this appointment ?')"
-                              title="Cancel Appointment" tooltip-placement="top" tooltip="Remove"><button class="btn btn-danger">Cancel</button></a>
-	                        <?php } else {
+<td>
+<?php 
+if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 1)) { 
+?>
+    <a href="admin-panel.php?ID=<?php echo $row['ID']?>&cancel=update" 
+       onClick="return confirm('Are you sure you want to cancel this appointment ?')"
+       title="Cancel Appointment" tooltip-placement="top" tooltip="Remove">
+       <button class="btn btn-danger">Cancel</button>
+    </a>
+<?php 
+} elseif ($row['doctorStatus'] == 2) { 
+    echo ""; // Show nothing when accepted by the doctor
+} else { 
+    echo "Cancelled";
+} 
+?>
+</td>
+</tr>
+<?php } ?>
 
-                                echo "Cancelled";
-                                } ?>
-                        
-                        </td>
-                      </tr>
-                    <?php } ?>
                 </tbody>
               </table>
         <br>
