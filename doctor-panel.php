@@ -78,16 +78,16 @@ if(isset($_GET['cancel']))
 
   <style >
     .bg-primary {
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    background: -webkit-linear-gradient(left,#522258,#D95F59);
 }
 .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: #342ac1;
-    border-color: #007bff;
+    background-color: #522258;
+    border-color: #522258;
 }
 .text-primary {
-    color: #342ac1!important;
+    color: #522258!important;
 }
   </style>
 

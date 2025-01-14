@@ -74,7 +74,7 @@ if (isset($_POST['docsub1'])) {
 
     <style>
       .bg-primary {
-        background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+        background: -webkit-linear-gradient(left,#522258,#D95F59);
       }
 
       .col-md-4 {
@@ -84,12 +84,12 @@ if (isset($_POST['docsub1'])) {
       .list-group-item.active {
         z-index: 2;
         color: #fff;
-        background-color: #342ac1;
-        border-color: #007bff;
+        background-color: #522258;
+        border-color: #522258;
       }
 
       .text-primary {
-        color: #342ac1 !important;
+        color: #522258 !important;
       }
 
       #cpass {
@@ -101,8 +101,12 @@ if (isset($_POST['docsub1'])) {
       }
 
       .btn-primary {
-        background-color: #3c50c1;
-        border-color: #3c50c1;
+        background-color: #522258;
+        border-color: #522258;
+      }
+      .btn-primary:hover{
+        background-color: #D95F59;
+        border-color: #D95F59;
       }
     </style>
 
@@ -242,15 +246,13 @@ if (isset($_POST['docsub1'])) {
                       <p class="cl-effect-1">
                         <a href="#app-hist" style=" color: blue; text-decoration: none;"   
                                              onmouseover="this.style.color='red'" 
-                                             onmouseout="this.style.color='black'"
+                                             onmouseout="this.style.color='blue'"
                                               onclick="clickDiv('#list-adoc-list')">Add Doctors</a>
                         &nbsp|
                         <a href="#app-hist" style=" color: blue; text-decoration: none;"   
                                              onmouseover="this.style.color='red'" 
-                                             onmouseout="this.style.color='black'"
-                                              onclick="clickDiv('#list-ddoc-list')">
-                          Delete Doctors
-                        </a>
+                                             onmouseout="this.style.color='blue'"
+                                              onclick="clickDiv('#list-ddoc-list')">Delete Doctors</a>
                       </p>
                     </div>
                   </div>

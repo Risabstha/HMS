@@ -86,21 +86,25 @@ if(isset($_POST['prescribe']) && isset($_POST['pid']) && isset($_POST['ID']) && 
 
   <style >
     .bg-primary {
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    background: -webkit-linear-gradient(left,#522258,#D95F59);
 }
 .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: #342ac1;
-    border-color: #007bff;
+    background-color: #522258;
+    border-color: #522258;
 }
 .text-primary {
-    color: #342ac1!important;
+    color: #522258!important;
 }
 
 .btn-primary{
-  background-color: #3c50c1;
-  border-color: #3c50c1;
+  background-color: #522258;
+  border-color: #522258;
+}
+.btn-primary:hover{
+  background-color: #D95F59;
+  border-color: #D95F59;
 }
   </style>
 
@@ -132,18 +136,18 @@ if(isset($_POST['prescribe']) && isset($_POST['pid']) && isset($_POST['ID']) && 
         <form class="form-group" name="prescribeform" method="post" action="prescribe.php">
         
           <div class="row">
-                  <div class="col-md-4"><label>Disease:</label></div>
+                  <div class="col-md-1" style="margin-left:300px;"><label><b>Disease:</b></label></div>
                   <div class="col-md-8">
                   <!-- <input type="text" class="form-control" name="disease" required> -->
                   <textarea id="disease" cols="86" rows ="5" name="disease" required></textarea>
                   </div><br><br><br>
                   
-                  <div class="col-md-4"><label>Allergies:</label></div>
+                  <div class="col-md-1" style="margin-left:300px;"><label><b>Allergies:</b></label></div>
                   <div class="col-md-8">
                   <!-- <input type="text"  class="form-control" name="allergy" required> -->
                   <textarea id="allergy" cols="86" rows ="5" name="allergy" required></textarea>
                   </div><br><br><br>
-                  <div class="col-md-4"><label>Prescription:</label></div>
+                  <div class="col-md-1" style="margin-left:300px;"><label><b>Prescription:</b></label></div>
                   <div class="col-md-8">
                   <!-- <input type="text" class="form-control"  name="prescription"  required> -->
                   <textarea id="prescription" cols="86" rows ="10" name="prescription" required></textarea>
@@ -155,7 +159,7 @@ if(isset($_POST['prescribe']) && isset($_POST['pid']) && isset($_POST['ID']) && 
                   <input type="hidden" name="pid" value="<?php echo $pid ?>" />
                   <input type="hidden" name="ID" value="<?php echo $ID ?>" />
                   <br><br><br><br>
-          <input type="submit" name="prescribe" value="Prescribe" class="btn btn-primary" style="margin-left: 40pc;">
+          <input type="submit" name="prescribe" value="Prescribe" class="btn btn-primary" style="margin-left: 45pc;">
           
         </form>
         <br>

@@ -6,7 +6,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
-<body>
+<body style='background:-webkit-linear-gradient(left,#522258,#D95F59);'>
 <?php
 include("newfunc.php");
 if(isset($_POST['doctor_search_submit']))
@@ -21,8 +21,8 @@ if(isset($_POST['doctor_search_submit']))
   }
   else {
     echo "<div class='container-fluid' style='margin-top:50px;'>
-	<div class ='card'>
-	<div class='card-body' style='background-color:#342ac1;color:#ffffff;'>
+	<div class ='card' style='border:none; color:white;'>
+	<div class='card-body' style='background:-webkit-linear-gradient(left,#522258,#D95F59);'>
 <table class='table table-hover'>
   <thead>
     <tr>
