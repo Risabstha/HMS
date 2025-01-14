@@ -1,7 +1,10 @@
 <?php
+// PHP code here
+?>
+<style>
 background-color: #342ac1;
     border-color: #007bff;
-}
+
 .text-primary {
     color: #342ac1!important;
 }
