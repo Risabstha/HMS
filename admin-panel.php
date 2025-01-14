@@ -57,11 +57,11 @@ if(isset($_POST['app-submit']))
       }
     }
     else{
-      echo "<script>alert('Select a time or date in the future!');</script>";
+      echo "<script>alert('Past dates cannot be selected!');</script>";
     }
   }
   else{
-      echo "<script>alert('Select a time or date in the future!');</script>";
+      echo "<script>alert('Past dates cannot be selected!');</script>";
   }
   
 }
