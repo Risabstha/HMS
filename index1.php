@@ -34,7 +34,7 @@ include("header.php");
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" >
     <div class="container">
 
-      <a class="navbar-brand js-scroll-trigger" href="index.php" style="margin-top: 10px;margin-left:-65px;font-family: 'IBM Plex Sans', sans-serif;"><h4><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp Advanced Patient Care Solution</h4></a>
+      <a class="navbar-brand js-scroll-trigger" href="index.php" style="margin-top: 10px;margin-left:-65px;font-family: 'IBM Plex Sans', sans-serif;"><h4>&nbsp Advanced Patient Care Solution</h4></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -88,7 +88,7 @@ include("header.php");
                   <div class="col-md-8 email" ><input type="text" style="border-top-left-radius: 5% 40%;
                                                                       border-bottom-left-radius: 5% 40%;
                                                                       border-top-right-radius: 5% 40%;
-                                                                      border-bottom-right-radius: 5% 40%; "
+                                                                     border-bottom-right-radius: 5% 40%; "
                         name="email" class="form-control" placeholder="enter email ID" required/>
                   </div><br><br>
                   <div class="col-md-4" style="margin-top: 8%; color:#262626"><label>Password: </label></div>

@@ -7,7 +7,8 @@ $con=mysqli_connect("localhost","root","","myhmsdb");
 if(isset($_POST['patsub'])){
 	$email=$_POST['email'];
 	$password=$_POST['password2'];
-	$query="select * from patreg where email='$email' and password='$password';";
+  //decrypt pw
+	$query="select * from patreg where email='$email' and AES_DECRYPT(password, 'PWD')  = '" . mysqli_real_escape_string($con, $password) . "'";
 	$result=mysqli_query($con,$query);
 	if(mysqli_num_rows($result)==1)
 	{

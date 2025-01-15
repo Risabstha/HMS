@@ -6,7 +6,7 @@ $con=mysqli_connect("localhost","root","","myhmsdb");
 if(isset($_POST['adsub'])){
 	$username=$_POST['username1'];
 	$password=$_POST['password2'];
-	$query="select * from admintb where username='$username' and password='$password';";
+	$query="select * from admintb where username='$username' and  AES_DECRYPT(password, 'PWD')  ='" . mysqli_real_escape_string($con, $password) . "'";
 	$result=mysqli_query($con,$query);
 	if(mysqli_num_rows($result)==1)
 	{

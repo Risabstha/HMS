@@ -63,7 +63,7 @@ if(isset($_GET['cancel']))
     
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-  <a class="navbar-brand" href="#"><i class="fa fa-user-plus" aria-hidden="true"></i> Advanced Patient Care Solution </a>
+  <a class="navbar-brand" href="#">  Advanced Patient Care Solution </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -79,16 +79,16 @@ if(isset($_GET['cancel']))
   <style >
     .bg-primary {
     background: -webkit-linear-gradient(left,#522258,#D95F59);
-}
-.list-group-item.active {
-    z-index: 2;
-    color: #fff;
-    background-color: #522258;
-    border-color: #522258;
-}
-.text-primary {
-    color: #522258!important;
-}
+    }
+    .list-group-item.active {
+        z-index: 2;
+        color: #fff;
+        background-color: #522258;
+        border-color: #522258;
+    }
+    .text-primary {
+        color: #522258!important;
+    }
   </style>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -115,7 +115,7 @@ if(isset($_GET['cancel']))
    <div class="container-fluid" style="margin-top:50px;">
     <h3 style = "margin-left: 40%; padding-bottom: 20px;font-family:'IBM Plex Sans', sans-serif;"> Welcome &nbsp<?php echo $_SESSION['dname'] ?>  </h3>
     <div class="row">
-  <div class="col-md-4" style="max-width:18%;margin-top: 3%;">
+  <div class="col-md-2" style="max-width:15%;margin-top: 3%;">
     <div class="list-group" id="list-tab" role="tablist">
       <a class="list-group-item list-group-item-action active" href="#list-dash" role="tab" aria-controls="home" data-toggle="list">Dashboard</a>
       <a class="list-group-item list-group-item-action" href="#list-app" id="list-app-list" role="tab" data-toggle="list" aria-controls="home">Appointments</a>
@@ -180,15 +180,15 @@ if(isset($_GET['cancel']))
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Patient ID</th>
-                    <th scope="col">Appointment ID</th>
+                    <th scope="col">P.ID</th>
+                    <th scope="col" style="min-width: 92px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment ID</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Gender</th>
                     <th scope="col">Email</th>
                     <th scope="col">Contact</th>
-                    <th scope="col">Appointment Date</th>
-                    <th scope="col">Appointment Time</th>
+                    <th scope="col" style="min-width: 106px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Date</th>
+                    <th scope="col" style="min-width: 105px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Time</th>
                     <th scope="col">Current Status</th>
                     <th scope="col">Action</th>
                     <th scope="col">Prescribe</th>
@@ -207,15 +207,16 @@ if(isset($_GET['cancel']))
                       <tr>
                       <td><?php echo $row['pid'];?></td>
                         <td><?php echo $row['ID'];?></td>
-                        <td><?php echo $row['fname'];?></td>
-                        <td><?php echo $row['lname'];?></td>
+                        <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['fname'];?></td>
+                        <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['lname'];?></td>
                         <td><?php echo $row['gender'];?></td>
-                        <td><?php echo $row['email'];?></td>
+                        <td style="min-width: 210px; max-width: 210px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['email'];?></td>
                         <td><?php echo $row['contact'];?></td>
-                        <td><?php echo $row['appdate'];?></td>
+                        <td  ><?php echo $row['appdate'];?></td>
                         <td><?php echo $row['apptime'];?></td>
-                        <td>
-                    <?php if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
+              <td>
+                    <?php         //current status  
+                            if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
                     {
                       echo "Active";
                     }
@@ -229,9 +230,10 @@ if(isset($_GET['cancel']))
                       echo "Cancelled by You";
                     }
                         ?></td>
-
+        
                      <td>
-                        <?php if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
+                        <?php         //action 
+                                if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
                         { ?>
 
 													
@@ -244,16 +246,23 @@ if(isset($_GET['cancel']))
                                 } ?>
                         
                         </td>
+                                
+                                 <td>
 
-                        <td>
+                        <?php      //prescribe     // if patient cancel the appointment then patientStatus=0, if doctor cancel the appointment then doctorStatus=0
 
-                        <?php if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
+                              if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
                         { ?>
 
                         <a href="prescribe.php?pid=<?php echo $row['pid']?>&ID=<?php echo $row['ID']?>&fname=<?php echo $row['fname']?>&lname=<?php echo $row['lname']?>&appdate=<?php echo $row['appdate']?>&apptime=<?php echo $row['apptime']?>"
                         tooltip-placement="top" tooltip="Remove" title="prescribe">
                         <button class="btn btn-success">Prescibe</button></a>
-                        <?php } else {
+                        <?php }
+                          // elseif(($row['userStatus']==1) && ($row['doctorStatus']==1 )&&($row['prescribeStatus']==1))
+                          // {
+                          //   echo "Completed";
+                          // }
+                        else {
 
                             echo "-";
                             } ?>
@@ -270,7 +279,7 @@ if(isset($_GET['cancel']))
 
       
 
-      <div class="tab-pane fade" id="list-pres" role="tabpanel" aria-labelledby="list-pres-list">
+      <div class="tab-pane fade" id="list-pres" role="tabpanel" aria-labelledby="list-pres-list" >
         <table class="table table-hover">
                 <thead>
                   <tr>
@@ -305,15 +314,15 @@ if(isset($_GET['cancel']))
                   ?>
                       <tr>
                         <td><?php echo $row['pid'];?></td>
-                        <td><?php echo $row['fname'];?></td>
-                        <td><?php echo $row['lname'];?></td>
+                        <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['fname'];?></td>
+                        <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['lname'];?></td>
                         <td><?php echo $row['ID'];?></td>
                         
                         <td><?php echo $row['appdate'];?></td>
                         <td><?php echo $row['apptime'];?></td>
-                        <td><?php echo $row['disease'];?></td>
-                        <td><?php echo $row['allergy'];?></td>
-                        <td><?php echo $row['prescription'];?></td>
+                        <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['disease'];?></td>
+                        <td style="min-width: 240px; max-width: 240px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['allergy'];?></td>
+                        <td style="min-width: 250px; max-width: 250px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['prescription'];?></td>
                     
                       </tr>
                     <?php }

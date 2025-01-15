@@ -37,8 +37,7 @@ CREATE TABLE `admintb` (
 -- Dumping data for table `admintb`
 --
 
-INSERT INTO `admintb` (`username`, `password`) VALUES
-('admin', 'admin123');
+INSERT INTO `admintb` (`username`, `password`) VALUES('admin', AES_ENCRYPT('admin123', 'PWD'));
 
 -- --------------------------------------------------------
 
@@ -61,6 +60,7 @@ CREATE TABLE `appointmenttb` (
   `userStatus` int(5) NOT NULL,
   `doctorStatus` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Dumping data for table `appointmenttb`
@@ -127,14 +127,14 @@ CREATE TABLE `doctb` (
 --
 
 INSERT INTO `doctb` (`username`, `password`, `email`, `spec`, `docFees`) VALUES
-('ashok', 'ashok123', 'ashok@gmail.com', 'General', 500),
-('arun', 'arun123', 'arun@gmail.com', 'Cardiologist', 600),
-('Dinesh', 'dinesh123', 'dinesh@gmail.com', 'General', 700),
-('Ganesh', 'ganesh123', 'ganesh@gmail.com', 'Pediatrician', 550),
-('Kumar', 'kumar123', 'kumar@gmail.com', 'Pediatrician', 800),
-('Amit', 'amit123', 'amit@gmail.com', 'Cardiologist', 1000),
-('Abbis', 'abbis123', 'abbis@gmail.com', 'Neurologist', 1500),
-('Tiwary', 'tiwary123', 'tiwary@gmail.com', 'Pediatrician', 450);
+('ashok', AES_ENCRYPT('ashok123','PWD'), 'ashok@gmail.com', 'General', 500),
+('arun', AES_ENCRYPT('arun123','PWD'), 'arun@gmail.com', 'Cardiologist', 600),
+('Dinesh', AES_ENCRYPT('dinesh123','PWD'), 'dinesh@gmail.com', 'General', 700),
+('Ganesh', AES_ENCRYPT('ganesh123','PWD'), 'ganesh@gmail.com', 'Pediatrician', 550),
+('Kumar', AES_ENCRYPT('kumar123','PWD'), 'kumar@gmail.com', 'Pediatrician', 800),
+('Amit', AES_ENCRYPT('amit123','PWD'), 'amit@gmail.com', 'Cardiologist', 1000),
+('Abbis', AES_ENCRYPT('abbis123','PWD'), 'abbis@gmail.com', 'Neurologist', 1500),
+('Tiwary', AES_ENCRYPT('tiwary123','PWD'), 'tiwary@gmail.com', 'Pediatrician', 450);
 
 -- --------------------------------------------------------
 
@@ -158,17 +158,17 @@ CREATE TABLE `patreg` (
 --
 
 INSERT INTO `patreg` (`pid`, `fname`, `lname`, `gender`, `email`, `contact`, `password`, `cpassword`) VALUES
-(1, 'Ram', 'Kumar', 'Male', 'ram@gmail.com', '9876543210', 'ram123', 'ram123'),
-(2, 'Alia', 'Bhatt', 'Female', 'alia@gmail.com', '8976897689', 'alia123', 'alia123'),
-(3, 'Shahrukh', 'khan', 'Male', 'shahrukh@gmail.com', '8976898463', 'shahrukh123', 'shahrukh123'),
-(4, 'Kishan', 'Lal', 'Male', 'kishansmart0@gmail.com', '8838489464', 'kishan123', 'kishan123'),
-(5, 'Gautam', 'Shankararam', 'Male', 'gautam@gmail.com', '9070897653', 'gautam123', 'gautam123'),
-(6, 'Sushant', 'Singh', 'Male', 'sushant@gmail.com', '9059986865', 'sushant123', 'sushant123'),
-(7, 'Nancy', 'Deborah', 'Female', 'nancy@gmail.com', '9128972454', 'nancy123', 'nancy123'),
-(8, 'Kenny', 'Sebastian', 'Male', 'kenny@gmail.com', '9809879868', 'kenny123', 'kenny123'),
-(9, 'William', 'Blake', 'Male', 'william@gmail.com', '8683619153', 'william123', 'william123'),
-(10, 'Peter', 'Norvig', 'Male', 'peter@gmail.com', '9609362815', 'peter123', 'peter123'),
-(11, 'Shraddha', 'Kapoor', 'Female', 'shraddha@gmail.com', '9768946252', 'shraddha123', 'shraddha123');
+(1, 'Ram', 'Kumar', 'Male', 'ram@gmail.com', '9876543210', AES_ENCRYPT('ram123','PWD'), AES_ENCRYPT('ram123','PWD')),
+(2, 'Alia', 'Bhatt', 'Female', 'alia@gmail.com', '8976897689', AES_ENCRYPT('alia123','PWD'), AES_ENCRYPT('alia123','PWD')),
+(3, 'Shahrukh', 'khan', 'Male', 'shahrukh@gmail.com', '8976898463', AES_ENCRYPT('shahrukh123','PWD'), AES_ENCRYPT('shahrukh123','PWD')),
+(4, 'Kishan', 'Lal', 'Male', 'kishansmart0@gmail.com', '8838489464', AES_ENCRYPT('kishan123','PWD'), AES_ENCRYPT('kishan123','PWD')),
+(5, 'Gautam', 'Shankararam', 'Male', 'gautam@gmail.com', '9070897653', AES_ENCRYPT('gautam123','PWD'), AES_ENCRYPT('gautam123','PWD')),
+(6, 'Sushant', 'Singh', 'Male', 'sushant@gmail.com', '9059986865', AES_ENCRYPT('sushant123','PWD'), AES_ENCRYPT('sushant123','PWD')),
+(7, 'Nancy', 'Deborah', 'Female', 'nancy@gmail.com', '9128972454', AES_ENCRYPT('nancy123','PWD'), AES_ENCRYPT('nancy123','PWD')),
+(8, 'Kenny', 'Sebastian', 'Male', 'kenny@gmail.com', '9809879868', AES_ENCRYPT('kenny123','PWD'), AES_ENCRYPT('kenny123','PWD')),
+(9, 'William', 'Blake', 'Male', 'william@gmail.com', '8683619153', AES_ENCRYPT('william123','PWD'), AES_ENCRYPT('william123','PWD')),
+(10, 'Peter', 'Norvig', 'Male', 'peter@gmail.com', '9609362815', AES_ENCRYPT('peter123','PWD'), AES_ENCRYPT('peter123','PWD')),
+(11, 'Shraddha', 'Kapoor', 'Female', 'shraddha@gmail.com', '9768946252', AES_ENCRYPT('shraddha123','PWD'), AES_ENCRYPT('shraddha123','PWD'));
 
 -- --------------------------------------------------------
 

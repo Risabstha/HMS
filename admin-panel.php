@@ -189,7 +189,7 @@ function get_specs(){
     
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-  <a class="navbar-brand" href="#"><i class="fa fa-user-plus" aria-hidden="true"></i> Advanced Patient Care Solution </a>
+  <a class="navbar-brand" href="#"> Advanced Patient Care Solution </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -499,7 +499,7 @@ function get_specs(){
                       #$contact = $row['contact'];
                   ?>
                       <tr>
-                        <td><?php echo $row['doctor'];?></td>
+                        <td style="min-width: 110px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['doctor'];?></td>
                         <td><?php echo $row['docFees'];?></td>
                         <td><?php echo $row['appdate'];?></td>
                         <td><?php echo $row['apptime'];?></td>
@@ -576,13 +576,13 @@ function get_specs(){
                     while ($row = mysqli_fetch_array($result)){
                   ?>
                       <tr>
-                        <td><?php echo $row['doctor'];?></td>
+                        <td style="min-width: 110px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['doctor'];?></td>
                         <td><?php echo $row['ID'];?></td>
                         <td><?php echo $row['appdate'];?></td>
                         <td><?php echo $row['apptime'];?></td>
-                        <td><?php echo $row['disease'];?></td>
-                        <td><?php echo $row['allergy'];?></td>
-                        <td><?php echo $row['prescription'];?></td>
+                        <td style="min-width: 150px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['disease'];?></td>
+                        <td style="min-width: 150px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['allergy'];?></td>
+                        <td style="min-width: 200px; max-width: 200px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['prescription'];?></td>
                         <td>
                           <form method="get">
                           <!-- <a href="admin-panel.php?ID=" 

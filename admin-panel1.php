@@ -10,7 +10,7 @@ if (isset($_POST['docsub'])) {
   $demail = $_POST['demail'];
   $spec = $_POST['special'];
   $docFees = $_POST['docFees'];
-  $query = "insert into doctb(username,password,email,spec,docFees)values('$doctor','$dpassword','$demail','$spec','$docFees')";
+  $query = "insert into doctb(username,password,email,spec,docFees)values('$doctor',AES_ENCRYPT('$dpassword', 'PWD'),'$demail','$spec','$docFees')";
   $result = mysqli_query($con, $query);
   if ($result) {
     echo "<script>alert('Doctor added successfully!');</script>";
@@ -49,7 +49,7 @@ if (isset($_POST['docsub1'])) {
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <a class="navbar-brand" href="#"><i class="fa fa-user-plus" aria-hidden="true"></i> Advanced Patient Care Solution </a>
+    <a class="navbar-brand" href="#"> Advanced Patient Care Solution </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -136,7 +136,7 @@ if (isset($_POST['docsub1'])) {
   <div class="container-fluid" style="margin-top:50px;">
     <h3 style="margin-left: 40%; padding-bottom: 20px;font-family: 'IBM Plex Sans', sans-serif;"> WELCOME ADMIN </h3>
     <div class="row">
-      <div class="col-md-4" style="max-width:25%;margin-top: 3%;">
+      <div class="col-md-2" style="max-width:15%;margin-top: 3%;">
         <div class="list-group" id="list-tab" role="tablist">
           <a class="list-group-item list-group-item-action active" id="list-dash-list" data-toggle="list" href="#list-dash" role="tab" aria-controls="home">Dashboard</a>
           <a class="list-group-item list-group-item-action" href="#list-doc" id="list-doc-list" role="tab" aria-controls="home" data-toggle="list">Doctor List</a>
@@ -287,11 +287,11 @@ if (isset($_POST['docsub1'])) {
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Doctor Name</th>
-                  <th scope="col">Specialization</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Password</th>
-                  <th scope="col">Fees</th>
+                  <th scope="col" >Doctor Name</th>
+                  <th scope="col" >Specialization</th>
+                  <th scope="col" >Email</th>
+                  <th scope="col" >Password</th>
+                  <th scope="col" >Fees</th>
                 </tr>
               </thead>
               <tbody>
@@ -308,11 +308,11 @@ if (isset($_POST['docsub1'])) {
                   $docFees = $row['docFees'];
 
                   echo "<tr>
-                        <td>$username</td>
-                        <td>$spec</td>
-                        <td>$email</td>
-                        <td>$password</td>
-                        <td>$docFees</td>
+                        <td style='min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$username</td>
+                        <td style='min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$spec</td>
+                        <td style='min-width: 220px; max-width: 220px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$email</td>
+                        <td style='min-width: 200px; max-width: 200px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$password</td>
+                        <td style='min-width: 100px; max-width: 100px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$docFees</td>
                       </tr>";
                 }
 
@@ -363,12 +363,12 @@ if (isset($_POST['docsub1'])) {
 
                   echo "<tr>
                         <td>$pid</td>
-                        <td>$fname</td>
-                        <td>$lname</td>
+                        <td style='min-width: 110px; max-width: 110px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$fname</td>
+                        <td style='min-width: 110px; max-width: 110px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$lname</td>
                         <td>$gender</td>
-                        <td>$email</td>
-                        <td>$contact</td>
-                        <td>$password</td>
+                        <td style='min-width: 250px; max-width: 250px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$email</td>
+                        <td >$contact</td>
+                        <td style='min-width: 200px; max-width: 200px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$password</td>
                       </tr>";
                 }
 
@@ -392,14 +392,14 @@ if (isset($_POST['docsub1'])) {
                     <tr>
                       <th scope="col">Doctor</th>
                       <th scope="col">Patient ID</th>
-                      <th scope="col">Appointment ID</th>
-                      <th scope="col">First Name</th>
-                      <th scope="col">Last Name</th>
-                      <th scope="col">Appointment Date</th>
-                      <th scope="col">Appointment Time</th>
-                      <th scope="col">Disease</th>
-                      <th scope="col">Allergy</th>
-                      <th scope="col">Prescription</th>
+                      <th scope="col"style="min-width: 92px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment ID</th>
+                      <th scope="col" style="min-width: 10p5x; max-width: 105px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">First Name</th>
+                      <th scope="col" style="min-width: 105px; max-width: 105px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Last Name</th>
+                      <th scope="col"style="min-width: 106px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Date</th>
+                      <th scope="col"style="min-width: 105px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Time</th>
+                      <th scope="col" style="min-width: 140px; max-width: 140px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Disease</th>
+                      <th scope="col"style="min-width: 175px; max-width: 175px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Allergy</th>
+                      <th scope="col" style="min-width: 215px; max-width: 215px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Prescription</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -422,16 +422,16 @@ if (isset($_POST['docsub1'])) {
 
 
                       echo "<tr>
-                        <td>$doctor</td>
+                        <td style='min-width: 105px; max-width: 105px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$doctor</td>
                         <td>$pid</td>
                         <td>$ID</td>
-                        <td>$fname</td>
-                        <td>$lname</td>
+                        <td style='min-width: 105px; max-width: 105px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$fname</td>
+                        <td style='min-width: 105px; max-width: 105px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$lname</td>
                         <td>$appdate</td>
                         <td>$apptime</td>
-                        <td>$disease</td>
-                        <td>$allergy</td>
-                        <td>$pres</td>
+                        <td style='min-width: 140px; max-width: 140px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$disease</td>
+                        <td style='min-width: 175px; max-width: 175px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$allergy</td>
+                        <td style='min-width: 215px; max-width: 215px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$pres</td>
                       </tr>";
                     }
 
@@ -460,17 +460,17 @@ if (isset($_POST['docsub1'])) {
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Appointment ID</th>
-                  <th scope="col">Patient ID</th>
-                  <th scope="col">First Name</th>
-                  <th scope="col">Last Name</th>
+                  <th scope="col"style="min-width: 92px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment ID</th>
+                  <th scope="col">P.ID</th>
+                  <th scope="col" style="min-width: 100px; max-width: 100px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">First Name</th>
+                  <th scope="col" style="min-width: 90px; max-width: 90px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Last Name</th>
                   <th scope="col">Gender</th>
                   <th scope="col">Email</th>
                   <th scope="col">Contact</th>
                   <th scope="col">Doctor Name</th>
-                  <th scope="col">Consultancy Fees</th>
-                  <th scope="col">Appointment Date</th>
-                  <th scope="col">Appointment Time</th>
+                  <th scope="col">Doctor Fees</th>
+                  <th scope="col"style="min-width: 106px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Date</th>
+                  <th scope="col"style="min-width: 105px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Time</th>
                   <th scope="col">Appointment Status</th>
                 </tr>
               </thead>
@@ -487,12 +487,12 @@ if (isset($_POST['docsub1'])) {
                   <tr>
                     <td><?php echo $row['ID']; ?></td>
                     <td><?php echo $row['pid']; ?></td>
-                    <td><?php echo $row['fname']; ?></td>
-                    <td><?php echo $row['lname']; ?></td>
+                    <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['fname']; ?></td>
+                    <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['lname']; ?></td>
                     <td><?php echo $row['gender']; ?></td>
-                    <td><?php echo $row['email']; ?></td>
+                    <td style="min-width: 210px; max-width: 210px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['email']; ?></td>
                     <td><?php echo $row['contact']; ?></td>
-                    <td><?php echo $row['doctor']; ?></td>
+                    <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['doctor']; ?></td>
                     <td><?php echo $row['docFees']; ?></td>
                     <td><?php echo $row['appdate']; ?></td>
                     <td><?php echo $row['apptime']; ?></td>
@@ -598,10 +598,10 @@ if (isset($_POST['docsub1'])) {
                   #$contact = $row['contact'];
                 ?>
                   <tr>
-                    <td><?php echo $row['name']; ?></td>
-                    <td><?php echo $row['email']; ?></td>
-                    <td><?php echo $row['contact']; ?></td>
-                    <td><?php echo $row['message']; ?></td>
+                    <td style='min-width: 150px; max-width: 150px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'><?php echo $row['name']; ?></td>
+                    <td style='min-width: 250px; max-width: 250px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'><?php echo $row['email']; ?></td>
+                    <td style='min-width: 120px; max-width: 120px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'><?php echo $row['contact']; ?></td>
+                    <td style='min-width: 500px; max-width:500px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'><?php echo $row['message']; ?></td>
                   </tr>
                 <?php } ?>
               </tbody>
