@@ -115,7 +115,6 @@ if(isset($_POST['app-submit']))
   $contact = $_SESSION['contact'];
   $doctor=$_POST['doctor'];
   $email=$_SESSION['email'];
-  # $fees=$_POST['fees'];
   $docFees=$_POST['docFees'];
 
   $appdate=$_POST['appdate'];
@@ -136,6 +135,8 @@ if(isset($_POST['app-submit']))
           if($query)
           {
             echo "<script>alert('Your appointment successfully booked');</script>";
+            header("Location: admin-panel.php");
+            exit();
           }
           else{
             echo "<script>alert('Unable to process your request. Please try again!');</script>";
@@ -161,6 +162,8 @@ if(isset($_GET['cancel']))
     if($query)
     {
       echo "<script>alert('Your appointment successfully cancelled');</script>";
+      header("Location: admin-panel.php");
+      exit();
     }
   }
 
@@ -508,21 +511,22 @@ function get_specs(){
                               <input class="form-control" type="text" name="docFees" id="docFees" readonly="readonly"/>
                   </div><br><br>
 
-                  <div class="col-md-4"><label>Appointment Date</label></div>
-                  <div class="col-md-8"><input type="date" class="form-control datepicker" name="appdate"></div><br><br>
+                  <div class="col-md-4"><label>Appointment Date:</label></div>
+                  <div class="col-md-8"><input type="date" class="form-control" name="appdate" required></div><br><br>
 
-                  <div class="col-md-4"><label>Appointment Time</label></div>
+                  <div class="col-md-4"><label>Appointment Time:</label></div>
                   <div class="col-md-8">
-                    <!-- <input type="time" class="form-control" name="apptime"> -->
-                    <select name="apptime" class="form-control" id="apptime" required="required">
-                      <option value="" disabled selected>Select Time</option>
-                      <option value="08:00:00">8:00 AM</option>
-                      <option value="10:00:00">10:00 AM</option>
-                      <option value="12:00:00">12:00 PM</option>
-                      <option value="14:00:00">2:00 PM</option>
-                      <option value="16:00:00">4:00 PM</option>
+                    <select class="form-control" name="apptime" required>
+                      <option value="08:00">08:00 AM</option>
+                      <option value="09:00">09:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="11:00">11:00 AM</option>
+                      <option value="12:00">12:00 PM</option>
+                      <option value="13:00">01:00 PM</option>
+                      <option value="14:00">02:00 PM</option>
+                      <option value="15:00">03:00 PM</option>
+                      <option value="16:00">04:00 PM</option>
                     </select>
-
                   </div><br><br>
 
                   <div class="col-md-4">
