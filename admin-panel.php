@@ -1,19 +1,108 @@
 <!DOCTYPE html>
-<?php 
+<html>
+<head>
+    <style>
+        .notification {
+            visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color:#46942c ;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        transition: visibility 0s, opacity 0.5s linear;
+        }
+
+        .notification.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.8s, fadeout 0.8s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+    <div id="notification" class="notification">
+        You have a new prescription from your doctor.
+    </div>
+    <audio id="notificationSound" src="sounds/notification.mp3" preload="auto"></audio>
+    <script>
+        function showNotification() {
+            var notification = document.getElementById("notification");
+            var notificationSound = document.getElementById("notificationSound");
+            notification.className = "notification show";
+            notificationSound.play();
+            setTimeout(function(){ notification.className = notification.className.replace("show", ""); }, 3000);
+        }
+
+        function checkForNewPrescriptions() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "check_new_prescriptions.php", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.responseText == "true") {
+                        showNotification();
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        setInterval(checkForNewPrescriptions, 4000); // Check every 4 seconds
+    </script>
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include('func.php');  
 include('newfunc.php');
 $con=mysqli_connect("localhost","root","","myhmsdb");
 
+$pid = $_SESSION['pid'];
+$username = $_SESSION['username'];
+$email = $_SESSION['email'];
+$fname = $_SESSION['fname'];
+$gender = $_SESSION['gender'];
+$lname = $_SESSION['lname'];
+$contact = $_SESSION['contact'];
 
-  $pid = $_SESSION['pid'];
-  $username = $_SESSION['username'];
-  $email = $_SESSION['email'];
-  $fname = $_SESSION['fname'];
-  $gender = $_SESSION['gender'];
-  $lname = $_SESSION['lname'];
-  $contact = $_SESSION['contact'];
-
-
+// Check for new prescriptions on page load
+if (!isset($_SESSION['new_prescription_alert_shown'])) {
+    $new_prescriptions_query = mysqli_query($con, "SELECT * FROM prestb WHERE pid='$pid' AND isNew=TRUE");
+    if (mysqli_num_rows($new_prescriptions_query) > 0) {
+        echo "<script>showNotification();</script>";
+        // Mark prescriptions as seen
+        mysqli_query($con, "UPDATE prestb SET isNew=FALSE WHERE pid='$pid' AND isNew=TRUE");
+        // Set session variable to indicate the alert has been shown
+        $_SESSION['new_prescription_alert_shown'] = true;
+    }
+}
 
 if(isset($_POST['app-submit']))
 {
@@ -74,10 +163,6 @@ if(isset($_GET['cancel']))
       echo "<script>alert('Your appointment successfully cancelled');</script>";
     }
   }
-
-
-
-
 
 function generate_bill(){
   $con=mysqli_connect("localhost","root","","myhmsdb");

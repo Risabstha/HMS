@@ -59,7 +59,8 @@ CREATE TABLE `appointmenttb` (
   `appdate` date NOT NULL,
   `apptime` time NOT NULL,
   `userStatus` int(5) NOT NULL,
-  `doctorStatus` int(5) NOT NULL
+  `doctorStatus` int(5) NOT NULL,
+  `isNew` BOOLEAN DEFAULT TRUE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -223,11 +224,7 @@ ALTER TABLE `patreg`
 -- AUTO_INCREMENT for table `appointmenttb`
 --
 ALTER TABLE `appointmenttb`
-ALTER TABLE appointmenttb ADD COLUMN isNew BOOLEAN DEFAULT TRUE;
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
-
-  
 
 --
 -- AUTO_INCREMENT for table `patreg`
@@ -246,3 +243,6 @@ ALTER TABLE appointmenttb ADD COLUMN doctorStatus INT DEFAULT 1;
 ALTER TABLE prestb 
 ADD CONSTRAINT fk_pres_pid FOREIGN KEY (pid) REFERENCES patienttb(ID),
 ADD CONSTRAINT fk_pres_appointment FOREIGN KEY (ID) REFERENCES appointmenttb(ID);
+
+-- Add isNew column to prestb
+ALTER TABLE prestb ADD COLUMN isNew BOOLEAN DEFAULT TRUE;

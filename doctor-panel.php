@@ -203,14 +203,22 @@ if(isset($_GET['accept'])) {
                           ?>
                         </td>
                         <td>
-                          <?php if(($row['userStatus']==1) && ($row['doctorStatus']==2)) { ?>
-                            <a href="prescribe.php?pid=<?php echo $row['pid']?>&ID=<?php echo $row['ID']?>&fname=<?php echo $row['fname']?>&lname=<?php echo $row['lname']?>&appdate=<?php echo $row['appdate']?>&apptime=<?php echo $row['apptime']?>"
-                              tooltip-placement="top" tooltip="Remove" title="prescribe">
-                              <button class="btn btn-success">Prescribe</button>
-                            </a>
-                          <?php } else {
+                          <?php 
+                            $prescriptionQuery = mysqli_query($con, "SELECT * FROM prestb WHERE ID = '".$row['ID']."'");
+                            if ($row['doctorStatus'] == 2) {
+                              if (mysqli_num_rows($prescriptionQuery) == 0 && ($row['userStatus'] == 1)) { 
+                          ?>
+                                <a href="prescribe.php?pid=<?php echo $row['pid']?>&ID=<?php echo $row['ID']?>&fname=<?php echo $row['fname']?>&lname=<?php echo $row['lname']?>&appdate=<?php echo $row['appdate']?>&apptime=<?php echo $row['apptime']?>"
+                                  tooltip-placement="top" tooltip="Remove" title="prescribe">
+                                  <button class="btn btn-success" id="prescribe-btn-<?php echo $row['ID']?>" onclick="hideButton(<?php echo $row['ID']?>)">Prescribe</button>
+                                </a>
+                          <?php 
+                              } else {
+                                echo "Prescription Sent";
+                              }
+                            } else {
                               echo "-";
-                            } 
+                            }
                           ?>
                         </td>
                       </tr>
