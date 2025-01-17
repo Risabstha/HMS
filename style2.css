@@ -79,3 +79,10 @@
 .btnRegister:hover{
     background-color: #D95F59;
 }
+.linke{
+    color: #522258;
+}
+.linke:hover{
+    color: #D95F59;
+    text-decoration: none;
+}

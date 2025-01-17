@@ -212,6 +212,10 @@ function get_specs(){
   background-color: #522258;
   border-color: #522258;
 }
+.btn-primary:hover{
+  background-color: #D95F59;
+  border-color: #D95F59;
+}
 
   </style>
 

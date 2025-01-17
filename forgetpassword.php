@@ -1,5 +1,89 @@
+
 <?php
 include("header.php");
+
+require 'vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+
+?>
+<?php
+
+session_start();
+$con = mysqli_connect("localhost", "root", "", "myhmsdb");
+if (!$con) {
+  die("Database connection failed: " . mysqli_connect_error());
+}
+$email = "";
+$errors = array();
+
+
+
+
+
+$check_email = "SELECT * FROM patreg WHERE email = '$email'";
+//if user click continue button in forgot password form
+if (isset($_POST['check-email'])) {
+  $email = mysqli_real_escape_string($con, $_POST['email']); // Sanitize input
+  $check_email_query = "SELECT * FROM patreg WHERE email='$email'";
+  $run_sql = mysqli_query($con, $check_email_query);
+
+  if (mysqli_num_rows($run_sql) > 0) {
+       // Email exists in the database
+       $code = rand(999999, 111111); // Generate a random OTP
+       $insert_code_query = "UPDATE patreg SET code = $code WHERE email = '$email'";
+       $run_query = mysqli_query($con, $insert_code_query);
+       if ($run_query) {
+// PHPMailer setup
+      $mail = new PHPMailer(true);
+
+      try {
+        // PHPMailer configuration
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'superior18281809@gmail.com';
+        $mail->Password = 'cpnh vzxg umck lxvj'; // Use the App Password here
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+    
+        // Recipients
+        $mail->setFrom('noreply@gmail.com', 'Advanced Patient Care Solution');
+        $mail->addAddress($email);
+
+        //Optional: Set "Reply-To" to the same "noreply" email to make sure recipients know they can't reply
+        $mail->addReplyTo('noreply@gmail.com', 'No Reply');
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = "Password Reset Code";
+        $mail->Body = "Your password reset code is $code";
+    
+        $mail->send();
+        // Success message
+        $info = "We've sent a password reset OTP to your email - $email";
+        $_SESSION['info'] = $info;
+        $_SESSION['email'] = $email;
+        header('location: reset-code.php');
+        exit();
+    } catch (Exception $e) {
+        // Error handling
+        $errors['otp-error'] = "Failed while sending code! Error: {$mail->ErrorInfo}";
+    }
+    
+  
+} else {
+        $errors['db-error'] = "Something went wrong while updating the OTP!";
+    }
+} else {
+// Email does not exist
+$errors['email'] = "This email address does not exist!";
+}
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +106,7 @@ include("header.php");
   <style type="text/css">
     #inputbtn:hover{cursor:pointer;}
     .card{
-    background: #522258;
+    background: #f8f9fa;
     border-top-left-radius: 7% 7%;
     border-bottom-left-radius: 7% 7%;
     border-top-right-radius: 7% 7%;
@@ -63,13 +147,13 @@ include("header.php");
 
         
 
-         <div class="col-md-7" style="padding-left: 10%; ">
+         <div class="col-md-7" style="padding-left: 180px; ">
                  <div style="-webkit-animation: mover 2s infinite alternate;
-    animation: mover 1s infinite alternate; width: 30%;padding-left: 0px;margin-top: 18%;margin-left: 13%;margin-bottom:1%">
+    animation: mover 1s infinite alternate; width: 30%;padding-left: 0px;margin-top: 150px;margin-left: 45px;margin-bottom:15px">
           <img style="width:200px; height: 200px;" src="assets/images/apcs8.png" alt="ACPS logo"/>
       </div>
 
-     <div style="color: white;">
+      <div style="color: white;">
             <h4 style="font-family: 'IBM Plex Sans', sans-serif;">Caring for You, Anytime, Anywhere.</h4>
           </div>
 
@@ -81,37 +165,39 @@ include("header.php");
               <center>
                 <i class="fa fa-hospital-o fa-3x" aria-hidden="true" style="color:#0062cc; border: none; "></i>
                 <br>
-              <h3 style="margin-top: 10%; color:#522258">Patient Login</h3><br>
-              <form class="form-group" method="POST" action="func.php">
+              <h3 style="margin-top: 10%; color:#522258">Forget Password</h3><br>
+              <form class="form-group" method="POST" action="forgetpassword.php">
+                <?php if (count($errors) > 0): ?>
+                      <div class="alert alert-danger text-center">
+                          <?php foreach ($errors as $error): ?>
+                              <p><?php echo $error; ?></p>
+                          <?php endforeach; ?>
+                      </div>
+                  <?php endif; ?>
                 <div class="row" style="margin-top: 10%">
-                  <div class="col-md-4" style="color:#262626"><label>Email-ID: </label></div>
+                 
+                  
+                  
+
+                   <div class="col-md-4" style="color:#262626"><label>Email-ID: </label></div>
                   <div class="col-md-8 email" ><input type="text" style="border-top-left-radius: 5% 40%;
                                                                       border-bottom-left-radius: 5% 40%;
                                                                       border-top-right-radius: 5% 40%;
                                                                      border-bottom-right-radius: 5% 40%; "
-                        name="email" class="form-control" placeholder="enter email ID" required/>
+                        name="email" class="form-control" placeholder="enter your email ID" required value="<?php echo $email ?>"/>
                   </div><br><br>
-                  <div class="col-md-4" style="margin-top: 8%; color:#262626"><label>Password: </label></div>
-                  <div class="col-md-8 pw" style="margin-top: 8%"><input type="password" style="border-top-left-radius: 5% 40%;
-                                                                      border-bottom-left-radius: 5% 40%;
-                                                                      border-top-right-radius: 5% 40%;
-                                                                      border-bottom-right-radius: 5% 40%; "
-                             class="form-control" name="password2" placeholder="enter password" required/></div><br><br><br>
-                </div>
+                  
                 
-                <div class="row"><a class="linke" href="forgetpassword.php" style="margin-left: 62%;margin-top: 6% ; width:34%;">Forget Password</a></div>
-                 <div class="col-md-4"  style="margin-top: 7%; text-align: center;">
-                    <input type="submit" style="border-top-left-radius: 27% 40%;
+                 <div class="col-md-4"  style="margin-top: 8%">
+                    <center><input type="submit" style="border-top-left-radius: 27% 40%;
                                                         border-bottom-left-radius: 27% 40%;
                                                         border-top-right-radius: 27% 40%;
-                                                        border-bottom-right-radius: 27% 40%; 
-                                                        margin-left: 142%; width:60px;"
-                        id="inputbtn" name="patsub" value="Login" class="btnRegister">
-                  </div> 
-
+                                                        border-bottom-right-radius: 27% 40%;
+                                                        margin-left: 155%; width:60px; "
+                        id="inputbtn" name="check-email" value="submit" class="btnRegister" /></center></div>           
                  <!--  <div class="col-md-8" style="margin-top: 10%">
                     <a href="index.php" class="btn btn-primary">Back</a></div> -->
-                
+              
               </form>
             </center>
             </div>

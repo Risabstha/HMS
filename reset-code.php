@@ -1,5 +1,31 @@
 <?php
 include("header.php");
+
+session_start();
+$con = mysqli_connect('localhost', 'root', '', 'myhmsdb');
+$email = "";
+// $name = "";
+$errors = array();
+
+    //if user click check reset otp button
+    if(isset($_POST['check-reset-otp'])){
+      $_SESSION['info'] = "";
+      $otp_code = mysqli_real_escape_string($con, $_POST['otp']);
+      $check_code = "SELECT * FROM patreg WHERE code = $otp_code";
+      $code_res = mysqli_query($con, $check_code);
+      if(mysqli_num_rows($code_res) > 0){
+          $fetch_data = mysqli_fetch_assoc($code_res);
+          $email = $fetch_data['email'];
+          $_SESSION['email'] = $email;
+          $info = "We've sent a passwrod reset otp to your email - $email";
+          $_SESSION['info'] = $info;
+          header('location: newPassword.php');
+          exit();
+      }else{
+          $errors['otp-error'] = "You've entered incorrect code!";
+      }
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +41,7 @@ include("header.php");
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" type="text/css" href="style2.css">
+  
 
 
     
@@ -22,7 +49,7 @@ include("header.php");
   <style type="text/css">
     #inputbtn:hover{cursor:pointer;}
     .card{
-    background: #522258;
+    background: #f8f9fa;
     border-top-left-radius: 7% 7%;
     border-bottom-left-radius: 7% 7%;
     border-top-right-radius: 7% 7%;
@@ -63,13 +90,13 @@ include("header.php");
 
         
 
-         <div class="col-md-7" style="padding-left: 10%; ">
+         <div class="col-md-7" style="padding-left: 180px; ">
                  <div style="-webkit-animation: mover 2s infinite alternate;
-    animation: mover 1s infinite alternate; width: 30%;padding-left: 0px;margin-top: 18%;margin-left: 13%;margin-bottom:1%">
+    animation: mover 1s infinite alternate; width: 30%;padding-left: 0px;margin-top: 150px;margin-left: 45px;margin-bottom:15px">
           <img style="width:200px; height: 200px;" src="assets/images/apcs8.png" alt="ACPS logo"/>
       </div>
 
-     <div style="color: white;">
+      <div style="color: white;">
             <h4 style="font-family: 'IBM Plex Sans', sans-serif;">Caring for You, Anytime, Anywhere.</h4>
           </div>
 
@@ -81,37 +108,56 @@ include("header.php");
               <center>
                 <i class="fa fa-hospital-o fa-3x" aria-hidden="true" style="color:#0062cc; border: none; "></i>
                 <br>
-              <h3 style="margin-top: 10%; color:#522258">Patient Login</h3><br>
-              <form class="form-group" method="POST" action="func.php">
+              <h3 style="margin-top: 10%; color:#522258">Code Verification</h3><br>
+              <form class="form-group" method="POST" action="reset-code.php">
                 <div class="row" style="margin-top: 10%">
-                  <div class="col-md-4" style="color:#262626"><label>Email-ID: </label></div>
-                  <div class="col-md-8 email" ><input type="text" style="border-top-left-radius: 5% 40%;
-                                                                      border-bottom-left-radius: 5% 40%;
-                                                                      border-top-right-radius: 5% 40%;
-                                                                     border-bottom-right-radius: 5% 40%; "
-                        name="email" class="form-control" placeholder="enter email ID" required/>
-                  </div><br><br>
-                  <div class="col-md-4" style="margin-top: 8%; color:#262626"><label>Password: </label></div>
-                  <div class="col-md-8 pw" style="margin-top: 8%"><input type="password" style="border-top-left-radius: 5% 40%;
+
+                
+                        <!-- used to print info message -->
+                        <?php 
+                            if(isset($_SESSION['info'])){
+                                ?>
+                                <div class="alert alert-success text-center" 
+                                      style="margin-left:10%; margin-top: -7%; margin-right:10%; width:80%;">
+                                    <?php echo $_SESSION['info']; ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                            <?php
+                              if(count($errors) > 0){
+                                ?>
+                                <div class="alert alert-danger text-center"
+                                      style="margin-left:10%; margin-top: -9%; margin-right:10%; width:80%;">
+                                    <?php
+                                    foreach($errors as $showerror){
+                                        echo $showerror;
+                                    }
+                                    ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                            <div class="col-md-8 pw" style="margin-top: 4%; margin-left:16%"><input type="number" style="border-top-left-radius: 5% 40%;
                                                                       border-bottom-left-radius: 5% 40%;
                                                                       border-top-right-radius: 5% 40%;
                                                                       border-bottom-right-radius: 5% 40%; "
-                             class="form-control" name="password2" placeholder="enter password" required/></div><br><br><br>
+                                    class="form-control" name="otp" placeholder="Enter Code" required/>
+                            </div><br><br><br>
                 </div>
                 
-                <div class="row"><a class="linke" href="forgetpassword.php" style="margin-left: 62%;margin-top: 6% ; width:34%;">Forget Password</a></div>
-                 <div class="col-md-4"  style="margin-top: 7%; text-align: center;">
-                    <input type="submit" style="border-top-left-radius: 27% 40%;
+                
+                 <div class="col-md-4"  style="margin-left: -90%;margin-top: 5%; margin-bottom:10%;">
+                    <center><input type="submit" style="border-top-left-radius: 27% 40%;
                                                         border-bottom-left-radius: 27% 40%;
                                                         border-top-right-radius: 27% 40%;
-                                                        border-bottom-right-radius: 27% 40%; 
-                                                        margin-left: 142%; width:60px;"
-                        id="inputbtn" name="patsub" value="Login" class="btnRegister">
-                  </div> 
-
+                                                        border-bottom-right-radius: 27% 40%;
+                                                        margin-left: 192%; width:60px; "
+                        id="inputbtn" name="check-reset-otp" value="submit" class="btnRegister"></center>
+                  </div>           
                  <!--  <div class="col-md-8" style="margin-top: 10%">
                     <a href="index.php" class="btn btn-primary">Back</a></div> -->
-                
+              
               </form>
             </center>
             </div>

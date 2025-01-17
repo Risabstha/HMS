@@ -1,5 +1,12 @@
 <?php
 include("header.php");
+
+
+ //if login now button click
+ if(isset($_POST['login-now'])){
+  
+    header('Location: index1.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +29,7 @@ include("header.php");
   <style type="text/css">
     #inputbtn:hover{cursor:pointer;}
     .card{
-    background: #522258;
+    background: #f8f9fa;
     border-top-left-radius: 7% 7%;
     border-bottom-left-radius: 7% 7%;
     border-top-right-radius: 7% 7%;
@@ -63,13 +70,13 @@ include("header.php");
 
         
 
-         <div class="col-md-7" style="padding-left: 10%; ">
+         <div class="col-md-7" style="padding-left: 180px; ">
                  <div style="-webkit-animation: mover 2s infinite alternate;
-    animation: mover 1s infinite alternate; width: 30%;padding-left: 0px;margin-top: 18%;margin-left: 13%;margin-bottom:1%">
+    animation: mover 1s infinite alternate; width: 30%;padding-left: 0px;margin-top: 150px;margin-left: 45px;margin-bottom:15px">
           <img style="width:200px; height: 200px;" src="assets/images/apcs8.png" alt="ACPS logo"/>
       </div>
 
-     <div style="color: white;">
+      <div style="color: white;">
             <h4 style="font-family: 'IBM Plex Sans', sans-serif;">Caring for You, Anytime, Anywhere.</h4>
           </div>
 
@@ -79,39 +86,24 @@ include("header.php");
           <div class="card" style="font-family: 'IBM Plex Sans', sans-serif; background: lightgrey;">
             <div class="card-body" >
               <center>
-                <i class="fa fa-hospital-o fa-3x" aria-hidden="true" style="color:#0062cc; border: none; "></i>
+                <i class="fa fa-hospital-o fa-3x " aria-hidden="true" style="color:#0062cc; border: none; "></i>
                 <br>
-              <h3 style="margin-top: 10%; color:#522258">Patient Login</h3><br>
-              <form class="form-group" method="POST" action="func.php">
-                <div class="row" style="margin-top: 10%">
-                  <div class="col-md-4" style="color:#262626"><label>Email-ID: </label></div>
-                  <div class="col-md-8 email" ><input type="text" style="border-top-left-radius: 5% 40%;
-                                                                      border-bottom-left-radius: 5% 40%;
-                                                                      border-top-right-radius: 5% 40%;
-                                                                     border-bottom-right-radius: 5% 40%; "
-                        name="email" class="form-control" placeholder="enter email ID" required/>
-                  </div><br><br>
-                  <div class="col-md-4" style="margin-top: 8%; color:#262626"><label>Password: </label></div>
-                  <div class="col-md-8 pw" style="margin-top: 8%"><input type="password" style="border-top-left-radius: 5% 40%;
-                                                                      border-bottom-left-radius: 5% 40%;
-                                                                      border-top-right-radius: 5% 40%;
-                                                                      border-bottom-right-radius: 5% 40%; "
-                             class="form-control" name="password2" placeholder="enter password" required/></div><br><br><br>
+                <div class="alert alert-success text-center" style="margin-top: 8%; padding:0px; ">
+                    <h5 style="margin-top: 10%; ">Your password has been changed.</h5><br>
                 </div>
-                
-                <div class="row"><a class="linke" href="forgetpassword.php" style="margin-left: 62%;margin-top: 6% ; width:34%;">Forget Password</a></div>
-                 <div class="col-md-4"  style="margin-top: 7%; text-align: center;">
-                    <input type="submit" style="border-top-left-radius: 27% 40%;
-                                                        border-bottom-left-radius: 27% 40%;
-                                                        border-top-right-radius: 27% 40%;
-                                                        border-bottom-right-radius: 27% 40%; 
-                                                        margin-left: 142%; width:60px;"
-                        id="inputbtn" name="patsub" value="Login" class="btnRegister">
-                  </div> 
-
+              <form class="form-group" method="POST" action="passwordChanged.php">
+                <div class="row" style="margin-top: 10%">
+               
+                 <div class="col-md-4"  style="margin-left: -10%;  margin-top: 7% ">
+                    <center><input type="submit" style="min-width:70%;  border-top-left-radius: 25% 50%;
+                                                        border-bottom-left-radius: 25% 50%;
+                                                        border-top-right-radius: 25% 50%;
+                                                        border-bottom-right-radius: 25% 50%;
+                                                        margin-left: 175%; width:70px; "
+                        id="inputbtn" name="login-now" value="Go to login" class="btnRegister"></center>          
                  <!--  <div class="col-md-8" style="margin-top: 10%">
                     <a href="index.php" class="btn btn-primary">Back</a></div> -->
-                
+                </div>
               </form>
             </center>
             </div>

@@ -70,9 +70,9 @@ if(isset($_GET['cancel']))
 
     <style >
       .btn-outline-light:hover{
-        color: #25bef7;
-        background-color: #f8f9fa;
-        border-color: #f8f9fa;
+        color: #ffffff;
+        background-color: #522258;
+        border-color: #522258;
       }
     </style>
 

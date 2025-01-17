@@ -66,7 +66,7 @@ if(isset($_POST['doc_sub']))
 	$result=mysqli_query($con,$query);
 	if($result)
 		header("Location:adddoc.php");
-}
+}                    
 function display_admin_panel(){
 	echo '<!DOCTYPE html>
 <html lang="en">
