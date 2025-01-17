@@ -15,7 +15,13 @@ if(isset($_POST['app_search_submit']))
 	$contact=$_POST['app_contact'];
 	$query = "select * from appointmenttb where contact= '$contact';";
   $result = mysqli_query($con,$query);
-  $row=mysqli_fetch_array($result);
+  if (!$result) {
+    die("Query failed: " . mysqli_error($con)); // Debug query issues
+  }
+
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_array($result);
+
   if($row['fname']=="" & $row['lname']=="" & $row['email']=="" & $row['contact']=="" & $row['doctor']=="" & $row['docFees']=="" & $row['appdate']=="" & $row['apptime']==""){
     echo "<script> alert('No entries found! Please enter valid details'); 
           window.location.href = 'admin-panel1.php#list-doc';</script>";
@@ -75,7 +81,16 @@ if(isset($_POST['app_search_submit']))
           </tr>";
     echo "</tbody></table><center><a href='admin-panel1.php' class='btn btn-light'>Back to your Dashboard</a></div></center></div></div></div>";
   }
+} else {
+  echo "<script>
+        alert('No entries found!');
+        window.location.href = 'admin-panel1.php#list-doc';
+    </script>";
+  exit();
+}
+  
   }
+  
 	
 ?>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

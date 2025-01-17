@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <?php
+
+
 $con = mysqli_connect("localhost", "root", "", "myhmsdb");
 
 include('newfunc.php');
@@ -8,7 +10,7 @@ if (isset($_POST['docsub'])) {
   $doctor = $_POST['doctor'];
   $dpassword = $_POST['dpassword'];
   $demail = $_POST['demail'];
-  $spec = $_POST['special'];
+  $spec = $_POST['special'] ??'';
   $docFees = $_POST['docFees'];
   $query = "insert into doctb(username,password,email,spec,docFees)values('$doctor',AES_ENCRYPT('$dpassword', 'PWD'),'$demail','$spec','$docFees')";
   $result = mysqli_query($con, $query);
@@ -524,8 +526,8 @@ if (isset($_POST['docsub1'])) {
                 <div class="col-md-8"><input type="text" class="form-control" name="doctor" onkeydown="return alphaOnly(event);" required></div><br><br>
                 <div class="col-md-4"><label>Specialization:</label></div>
                 <div class="col-md-8">
-                  <select name="special" class="form-control" id="special" required="required">
-                    <option value="head" name="spec" disabled selected>Select Specialization</option>
+                  <select name="special" class="form-control" id="special" required>
+                    <option value="" name="spec" disabled selected>Select Specialization</option>
                     <option value="General" name="spec">General</option>
                     <option value="Cardiologist" name="spec">Cardiologist</option>
                     <option value="Neurologist" name="spec">Neurologist</option>

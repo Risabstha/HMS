@@ -95,11 +95,12 @@ include("header.php");
                 <div class="row" style="margin-top: 10%">
                
                  <div class="col-md-4"  style="margin-left: -10%;  margin-top: 7% ">
-                    <center><input type="submit" style="min-width:70%;  border-top-left-radius: 25% 50%;
-                                                        border-bottom-left-radius: 25% 50%;
-                                                        border-top-right-radius: 25% 50%;
-                                                        border-bottom-right-radius: 25% 50%;
-                                                        margin-left: 175%; width:70px; "
+                    <center>
+                      <input type="submit" style="border-top-left-radius: 30% 120%;
+                                                        border-bottom-left-radius: 30% 120%;
+                                                       border-top-right-radius: 30% 120%;
+                                                        border-bottom-right-radius: 30% 120%; 
+                                                        margin-left: 155%; min-width:130%;"
                         id="inputbtn" name="login-now" value="Go to login" class="btnRegister"></center>          
                  <!--  <div class="col-md-8" style="margin-top: 10%">
                     <a href="index.php" class="btn btn-primary">Back</a></div> -->

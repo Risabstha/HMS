@@ -23,8 +23,6 @@ if(isset($_POST['change-password'])){
         $update_pass = "UPDATE patreg SET code = $code, password = AES_ENCRYPT('$password', 'PWD') WHERE email = '$email'";
         $run_query = mysqli_query($con, $update_pass);
         if($run_query){
-            $info = "Please create a new password.";
-            $_SESSION['info'] = $info;
             header('Location: passwordChanged.php');
         }else{
             $errors['db-error'] = "Failed to change your password!";
@@ -156,11 +154,12 @@ if(isset($_POST['change-password'])){
                 </div>
               
                  <div class="col-md-4"  style="margin-left: -90%;margin-top:5%; margin-bottom:10%;">
-                    <center><input type="submit" style="border-top-left-radius: 27% 40%;
-                                                        border-bottom-left-radius: 27% 40%;
-                                                        border-top-right-radius: 27% 40%;
-                                                        border-bottom-right-radius: 27% 40%; 
-                                                        margin-left: 192%;  "
+                    <center>
+                        <input type="submit" style="border-top-left-radius: 30% 120%;
+                                                        border-bottom-left-radius: 30% 120%;
+                                                       border-top-right-radius: 30% 120%;
+                                                        border-bottom-right-radius: 30% 120%; 
+                                                        margin-left: 155%; min-width:130%;"
                         id="inputbtn" name="change-password" value="Change" class="btnRegister"></center>
                   </div>           
                  <!--  <div class="col-md-8" style="margin-top: 10%">

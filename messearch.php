@@ -13,7 +13,13 @@ if(isset($_POST['mes_search_submit']))
 	$contact=$_POST['mes_contact'];
 	$query = "select * from contact where contact= '$contact'";
   $result = mysqli_query($con,$query);
-  $row=mysqli_fetch_array($result);
+  if (!$result) {
+    die("Query failed: " . mysqli_error($con)); // Debug query issues
+  }
+
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_array($result);
+
   if($row['name']=="" & $row['email']=="" & $row['contact']=="" & $row['message']==""){
     echo "<script> alert('No entries found! Please enter valid details'); 
           window.location.href = 'admin-panel1.php#list-doc';</script>";
@@ -47,6 +53,13 @@ if(isset($_POST['mes_search_submit']))
     
     echo "</tbody></table><center><a href='admin-panel1.php' class='btn btn-light'>Back to your Dashboard</a></div></center></div></div></div>";
   }
+} else {
+  echo "<script>
+        alert('No entries found!');
+        window.location.href = 'admin-panel1.php#list-doc';
+    </script>";
+  exit();
+}
   }
 	
 ?>

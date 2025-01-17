@@ -17,7 +17,7 @@ $errors = array();
           $fetch_data = mysqli_fetch_assoc($code_res);
           $email = $fetch_data['email'];
           $_SESSION['email'] = $email;
-          $info = "We've sent a passwrod reset otp to your email - $email";
+          $info = "Please create a new password.";
           $_SESSION['info'] = $info;
           header('location: newPassword.php');
           exit();
@@ -147,13 +147,16 @@ $errors = array();
                 </div>
                 
                 
-                 <div class="col-md-4"  style="margin-left: -90%;margin-top: 5%; margin-bottom:10%;">
-                    <center><input type="submit" style="border-top-left-radius: 27% 40%;
-                                                        border-bottom-left-radius: 27% 40%;
-                                                        border-top-right-radius: 27% 40%;
-                                                        border-bottom-right-radius: 27% 40%;
-                                                        margin-left: 192%; width:60px; "
-                        id="inputbtn" name="check-reset-otp" value="submit" class="btnRegister"></center>
+                <div class="col-md-4"  style="margin-left: -90%;margin-top: 5%; margin-bottom:10%;">
+                    <center>
+                        
+                        <input type="submit" style="border-top-left-radius: 30% 120%;
+                                                        border-bottom-left-radius: 30% 120%;
+                                                       border-top-right-radius: 30% 120%;
+                                                        border-bottom-right-radius: 30% 120%; 
+                                                        margin-left: 155%; min-width:130%;"
+                        id="inputbtn" name="check-reset-otp" value="submit" class="btnRegister">
+                      </center>
                   </div>           
                  <!--  <div class="col-md-8" style="margin-top: 10%">
                     <a href="index.php" class="btn btn-primary">Back</a></div> -->

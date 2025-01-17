@@ -119,22 +119,23 @@ CREATE TABLE `doctb` (
   `password` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `spec` varchar(50) NOT NULL,
-  `docFees` int(10) NOT NULL
+  `docFees` int(10) NOT NULL,
+  `code` mediumint(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `doctb`
 --
 
-INSERT INTO `doctb` (`username`, `password`, `email`, `spec`, `docFees`) VALUES
-('ashok', AES_ENCRYPT('ashok123','PWD'), 'ashok@gmail.com', 'General', 500),
-('arun', AES_ENCRYPT('arun123','PWD'), 'arun@gmail.com', 'Cardiologist', 600),
-('Dinesh', AES_ENCRYPT('dinesh123','PWD'), 'dinesh@gmail.com', 'General', 700),
-('Ganesh', AES_ENCRYPT('ganesh123','PWD'), 'ganesh@gmail.com', 'Pediatrician', 550),
-('Kumar', AES_ENCRYPT('kumar123','PWD'), 'kumar@gmail.com', 'Pediatrician', 800),
-('Amit', AES_ENCRYPT('amit123','PWD'), 'amit@gmail.com', 'Cardiologist', 1000),
-('Abbis', AES_ENCRYPT('abbis123','PWD'), 'abbis@gmail.com', 'Neurologist', 1500),
-('Tiwary', AES_ENCRYPT('tiwary123','PWD'), 'tiwary@gmail.com', 'Pediatrician', 450);
+INSERT INTO `doctb` (`username`, `password`, `email`, `spec`, `docFees`,`code`) VALUES
+('ashok', AES_ENCRYPT('ashok123','PWD'), 'ashok@gmail.com', 'General', 500,0),
+('arun', AES_ENCRYPT('arun123','PWD'), 'arun@gmail.com', 'Cardiologist', 600,0),
+('Dinesh', AES_ENCRYPT('dinesh123','PWD'), 'dinesh@gmail.com', 'General', 700,0),
+('Ganesh', AES_ENCRYPT('ganesh123','PWD'), 'ganesh@gmail.com', 'Pediatrician', 550,0),
+('Kumar', AES_ENCRYPT('kumar123','PWD'), 'kumar@gmail.com', 'Pediatrician', 800,0),
+('Amit', AES_ENCRYPT('amit123','PWD'), 'amit@gmail.com', 'Cardiologist', 1000,0),
+('Abbis', AES_ENCRYPT('abbis123','PWD'), 'abbis@gmail.com', 'Neurologist', 1500,0),
+('Tiwary', AES_ENCRYPT('tiwary123','PWD'), 'tiwary@gmail.com', 'Pediatrician', 450,0);
 
 -- --------------------------------------------------------
 

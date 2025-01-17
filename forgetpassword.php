@@ -180,7 +180,7 @@ $errors['email'] = "This email address does not exist!";
                   
 
                    <div class="col-md-4" style="color:#262626"><label>Email-ID: </label></div>
-                  <div class="col-md-8 email" ><input type="text" style="border-top-left-radius: 5% 40%;
+                  <div class="col-md-8 email" ><input type="email" style="border-top-left-radius: 5% 40%;
                                                                       border-bottom-left-radius: 5% 40%;
                                                                       border-top-right-radius: 5% 40%;
                                                                      border-bottom-right-radius: 5% 40%; "
@@ -189,12 +189,15 @@ $errors['email'] = "This email address does not exist!";
                   
                 
                  <div class="col-md-4"  style="margin-top: 8%">
-                    <center><input type="submit" style="border-top-left-radius: 27% 40%;
-                                                        border-bottom-left-radius: 27% 40%;
-                                                        border-top-right-radius: 27% 40%;
-                                                        border-bottom-right-radius: 27% 40%;
-                                                        margin-left: 155%; width:60px; "
-                        id="inputbtn" name="check-email" value="submit" class="btnRegister" /></center></div>           
+                    <center>
+                        <input type="submit" style="border-top-left-radius: 30% 120%;
+                                                        border-bottom-left-radius: 30% 120%;
+                                                       border-top-right-radius: 30% 120%;
+                                                        border-bottom-right-radius: 30% 120%; 
+                                                        margin-left: 105%; min-width:130%;"
+                        id="inputbtn" name="check-email" value="submit" class="btnRegister" />
+                      </center></div>
+
                  <!--  <div class="col-md-8" style="margin-top: 10%">
                     <a href="index.php" class="btn btn-primary">Back</a></div> -->
               

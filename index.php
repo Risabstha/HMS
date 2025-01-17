@@ -159,8 +159,9 @@ function checklen()
                                         <div class="form-group">
                                             <input type="password" class="form-control" placeholder="Password *" name="password3" required/>
                                         </div>
-                                        
-                                        <input type="submit" class="btnRegister" name="docsub1" value="Login"/>
+                                         
+                                        <div class="row"><a class="linke" href="docForgetPassword.php" style="margin-left: 54%;margin-top: 1% ; width:40%;">Forget Password</a></div>
+                                        <input type="submit" class="btnRegister" style="margin-top: 4%;;" name="docsub1" value="Login"/>
                                     </div>
                                 </div>
                             </form>
