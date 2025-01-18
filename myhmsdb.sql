@@ -30,14 +30,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admintb` (
   `username` varchar(50) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admintb`
 --
 
-INSERT INTO `admintb` (`username`, `password`) VALUES('admin', AES_ENCRYPT('admin123', 'PWD'));
+INSERT INTO `admintb` (`username`, `password`) VALUES('admin', '$2y$10$CXNZeqCvsBfWqfacDucBCui1A8GNtgZ/nkPiCPu30SovDCLy9dLVW');
 
 -- --------------------------------------------------------
 
@@ -63,22 +63,10 @@ CREATE TABLE `appointmenttb` (
 
 
 --
--- Dumping data for table `appointmenttb`
+-- make sure you enter data for table `appointmenttb`
 --
 
-INSERT INTO `appointmenttb` (`pid`, `ID`, `fname`, `lname`, `gender`, `email`, `contact`, `doctor`, `docFees`, `appdate`, `apptime`, `userStatus`, `doctorStatus`) VALUES
-(4, 1, 'Kishan', 'Lal', 'Male', 'kishansmart0@gmail.com', '8838489464', 'Ganesh', 550, '2020-02-14', '10:00:00', 1, 0),
-(4, 2, 'Kishan', 'Lal', 'Male', 'kishansmart0@gmail.com', '8838489464', 'Dinesh', 700, '2020-02-28', '10:00:00', 0, 1),
-(4, 3, 'Kishan', 'Lal', 'Male', 'kishansmart0@gmail.com', '8838489464', 'Amit', 1000, '2020-02-19', '03:00:00', 0, 1),
-(11, 4, 'Shraddha', 'Kapoor', 'Female', 'shraddha@gmail.com', '9768946252', 'ashok', 500, '2020-02-29', '20:00:00', 1, 1),
-(4, 5, 'Kishan', 'Lal', 'Male', 'kishansmart0@gmail.com', '8838489464', 'Dinesh', 700, '2020-02-28', '12:00:00', 1, 1),
-(4, 6, 'Kishan', 'Lal', 'Male', 'kishansmart0@gmail.com', '8838489464', 'Ganesh', 550, '2020-02-26', '15:00:00', 0, 1),
-(2, 8, 'Alia', 'Bhatt', 'Female', 'alia@gmail.com', '8976897689', 'Ganesh', 550, '2020-03-21', '10:00:00', 1, 1),
-(5, 9, 'Gautam', 'Shankararam', 'Male', 'gautam@gmail.com', '9070897653', 'Ganesh', 550, '2020-03-19', '20:00:00', 1, 0),
-(4, 10, 'Kishan', 'Lal', 'Male', 'kishansmart0@gmail.com', '8838489464', 'Ganesh', 550, '0000-00-00', '14:00:00', 1, 0),
-(4, 11, 'Kishan', 'Lal', 'Male', 'kishansmart0@gmail.com', '8838489464', 'Dinesh', 700, '2020-03-27', '15:00:00', 1, 1),
-(9, 12, 'William', 'Blake', 'Male', 'william@gmail.com', '8683619153', 'Kumar', 800, '2020-03-26', '12:00:00', 1, 1),
-(9, 13, 'William', 'Blake', 'Male', 'william@gmail.com', '8683619153', 'Tiwary', 450, '2020-03-26', '14:00:00', 1, 1);
+
 
 -- --------------------------------------------------------
 
@@ -94,19 +82,10 @@ CREATE TABLE `contact` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `contact`
+-- make sure you enter data for table `contact`
 --
 
-INSERT INTO `contact` (`name`, `email`, `contact`, `message`) VALUES
-('Anu', 'anu@gmail.com', '7896677554', 'Hey Admin'),
-(' Viki', 'viki@gmail.com', '9899778865', 'Good Job, Pal'),
-('Ananya', 'ananya@gmail.com', '9997888879', 'How can I reach you?'),
-('Aakash', 'aakash@gmail.com', '8788979967', 'Love your site'),
-('Mani', 'mani@gmail.com', '8977768978', 'Want some coffee?'),
-('Karthick', 'karthi@gmail.com', '9898989898', 'Good service'),
-('Abbis', 'abbis@gmail.com', '8979776868', 'Love your service'),
-('Asiq', 'asiq@gmail.com', '9087897564', 'Love your service. Thank you!'),
-('Jane', 'jane@gmail.com', '7869869757', 'I love your service!');
+
 
 -- --------------------------------------------------------
 
@@ -116,7 +95,7 @@ INSERT INTO `contact` (`name`, `email`, `contact`, `message`) VALUES
 
 CREATE TABLE `doctb` (
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `email` varchar(50) NOT NULL,
   `spec` varchar(50) NOT NULL,
   `docFees` int(10) NOT NULL,
@@ -124,18 +103,10 @@ CREATE TABLE `doctb` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `doctb`
+-- make sure you enter data for table `doctb`
 --
 
-INSERT INTO `doctb` (`username`, `password`, `email`, `spec`, `docFees`,`code`) VALUES
-('ashok', AES_ENCRYPT('ashok123','PWD'), 'ashok@gmail.com', 'General', 500,0),
-('arun', AES_ENCRYPT('arun123','PWD'), 'arun@gmail.com', 'Cardiologist', 600,0),
-('Dinesh', AES_ENCRYPT('dinesh123','PWD'), 'dinesh@gmail.com', 'General', 700,0),
-('Ganesh', AES_ENCRYPT('ganesh123','PWD'), 'ganesh@gmail.com', 'Pediatrician', 550,0),
-('Kumar', AES_ENCRYPT('kumar123','PWD'), 'kumar@gmail.com', 'Pediatrician', 800,0),
-('Amit', AES_ENCRYPT('amit123','PWD'), 'amit@gmail.com', 'Cardiologist', 1000,0),
-('Abbis', AES_ENCRYPT('abbis123','PWD'), 'abbis@gmail.com', 'Neurologist', 1500,0),
-('Tiwary', AES_ENCRYPT('tiwary123','PWD'), 'tiwary@gmail.com', 'Pediatrician', 450,0);
+
 
 -- --------------------------------------------------------
 
@@ -150,27 +121,16 @@ CREATE TABLE `patreg` (
   `gender` varchar(10) NOT NULL,
   `email` varchar(30) NOT NULL,
   `contact` varchar(10) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `code` mediumint(50) NOT NULL,
-  `cpassword` varchar(30) NOT NULL
+  `cpassword` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `patreg`
+-- make sure you enter data for table `patreg`
 --
 
-INSERT INTO `patreg` (`pid`, `fname`, `lname`, `gender`, `email`, `contact`, `password`,`code`, `cpassword`) VALUES
-(1, 'Ram', 'Kumar', 'Male', 'ram@gmail.com', '9876543210', AES_ENCRYPT('ram123','PWD'), 0, AES_ENCRYPT('ram123','PWD')),
-(2, 'Alia', 'Bhatt', 'Female', 'alia@gmail.com', '8976897689', AES_ENCRYPT('alia123','PWD'),0, AES_ENCRYPT('alia123','PWD')),
-(3, 'Shahrukh', 'khan', 'Male', 'shahrukh@gmail.com', '8976898463', AES_ENCRYPT('shahrukh123','PWD'), 0, AES_ENCRYPT('shahrukh123','PWD')),
-(4, 'Kishan', 'Lal', 'Male', 'kishansmart0@gmail.com', '8838489464', AES_ENCRYPT('kishan123','PWD'), 0, AES_ENCRYPT('kishan123','PWD')),
-(5, 'Gautam', 'Shankararam', 'Male', 'gautam@gmail.com', '9070897653', AES_ENCRYPT('gautam123','PWD'), 0, AES_ENCRYPT('gautam123','PWD')),
-(6, 'Sushant', 'Singh', 'Male', 'sushant@gmail.com', '9059986865', AES_ENCRYPT('sushant123','PWD'), 0, AES_ENCRYPT('sushant123','PWD')),
-(7, 'Nancy', 'Deborah', 'Female', 'nancy@gmail.com', '9128972454', AES_ENCRYPT('nancy123','PWD'), 0, AES_ENCRYPT('nancy123','PWD')),
-(8, 'Kenny', 'Sebastian', 'Male', 'kenny@gmail.com', '9809879868', AES_ENCRYPT('kenny123','PWD'), 0, AES_ENCRYPT('kenny123','PWD')),
-(9, 'William', 'Blake', 'Male', 'william@gmail.com', '8683619153', AES_ENCRYPT('william123','PWD'), 0, AES_ENCRYPT('william123','PWD')),
-(10, 'Peter', 'Norvig', 'Male', 'peter@gmail.com', '9609362815', AES_ENCRYPT('peter123','PWD'), 0, AES_ENCRYPT('peter123','PWD')),
-(11, 'Shraddha', 'Kapoor', 'Female', 'shraddha@gmail.com', '9768946252', AES_ENCRYPT('shraddha123','PWD'), 0, AES_ENCRYPT('shraddha123','PWD'));
+
 
 -- --------------------------------------------------------
 
@@ -192,14 +152,9 @@ CREATE TABLE `prestb` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `prestb`
+-- make sure you enter data for table `prestb`
 --
 
-INSERT INTO `prestb` (`doctor`, `pid`, `ID`, `fname`, `lname`, `appdate`, `apptime`, `disease`, `allergy`, `prescription`) VALUES
-('Dinesh', 4, 11, 'Kishan', 'Lal', '2020-03-27', '15:00:00', 'Cough', 'Nothing', 'Just take a teaspoon of Benadryl every night'),
-('Ganesh', 2, 8, 'Alia', 'Bhatt', '2020-03-21', '10:00:00', 'Severe Fever', 'Nothing', 'Take bed rest'),
-('Kumar', 9, 12, 'William', 'Blake', '2020-03-26', '12:00:00', 'Sever fever', 'nothing', 'Paracetamol -> 1 every morning and night'),
-('Tiwary', 9, 13, 'William', 'Blake', '2020-03-26', '14:00:00', 'Cough', 'Skin dryness', 'Intake fruits with more water content');
 
 --
 -- Indexes for dumped tables

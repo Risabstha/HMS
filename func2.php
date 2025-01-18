@@ -12,7 +12,10 @@ if(isset($_POST['patsub1'])){
 	$password=$_POST['password'];
   $cpassword=$_POST['cpassword'];
   if($password==$cpassword){
-  	$query="insert into patreg(fname,lname,gender,email,contact,password,cpassword) values ('$fname','$lname','$gender','$email','$contact',AES_ENCRYPT('$password', 'PWD'),AES_ENCRYPT('$cpassword', 'PWD'))";
+    // Hash the password
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    $hashed_cpassword = password_hash($cpassword, PASSWORD_BCRYPT);    
+  	$query="insert into patreg(fname,lname,gender,email,contact,password,cpassword) values ('$fname','$lname','$gender','$email','$contact','$hashed_password','$hashed_cpassword')";
     $result=mysqli_query($con,$query);
     if($result){
         $_SESSION['username'] = $_POST['fname']." ".$_POST['lname'];
@@ -23,7 +26,9 @@ if(isset($_POST['patsub1'])){
         $_SESSION['email'] = $_POST['email'];
         header("Location:admin-panel.php");
     } 
-
+    else {
+      echo "Error: " . mysqli_error($con);
+  }
     $query1 = "select * from patreg;";
     $result1 = mysqli_query($con,$query1);
     if($result1){
@@ -37,12 +42,15 @@ if(isset($_POST['patsub1'])){
 }
 if(isset($_POST['update_data']))
 {
-	$contact=$_POST['contact'];
-	$status=$_POST['status'];
+  $contact = mysqli_real_escape_string($con, $_POST['contact']);
+  $status = mysqli_real_escape_string($con, $_POST['status']);
 	$query="update appointmenttb set payment='$status' where contact='$contact';";
 	$result=mysqli_query($con,$query);
 	if($result)
 		header("Location:updated.php");
+    else {
+      echo "Error: " . mysqli_error($con);
+  }
 }
 
 

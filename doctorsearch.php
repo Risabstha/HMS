@@ -39,7 +39,6 @@
               <thead>
                 <tr>
                   <th scope='col'>Username</th>
-                  <th scope='col'>Password</th>
                   <th scope='col'>Email</th>
                   <th scope='col'>Consultancy Fees</th>
                 </tr>
@@ -47,13 +46,11 @@
               <tbody>";
 
         $username = $row['username'];
-        $password = $row['password'];
         $email = $row['email'];
         $docFees = $row['docFees'];
 
         echo "<tr>
               <td>$username</td>
-              <td>$password</td>
               <td>$email</td>
               <td>$docFees</td>
             </tr>";

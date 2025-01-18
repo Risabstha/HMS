@@ -12,7 +12,8 @@ if (isset($_POST['docsub'])) {
   $demail = $_POST['demail'];
   $spec = $_POST['special'] ??'';
   $docFees = $_POST['docFees'];
-  $query = "insert into doctb(username,password,email,spec,docFees)values('$doctor',AES_ENCRYPT('$dpassword', 'PWD'),'$demail','$spec','$docFees')";
+  $hashed_password = password_hash($dpassword, PASSWORD_BCRYPT);
+  $query = "insert into doctb(username,password,email,spec,docFees)values('$doctor','$hashed_password','$demail','$spec','$docFees')";
   $result = mysqli_query($con, $query);
   if ($result) {
     echo "<script>alert('Doctor added successfully!');</script>";
@@ -292,7 +293,6 @@ if (isset($_POST['docsub1'])) {
                   <th scope="col" >Doctor Name</th>
                   <th scope="col" >Specialization</th>
                   <th scope="col" >Email</th>
-                  <th scope="col" >Password</th>
                   <th scope="col" >Fees</th>
                 </tr>
               </thead>
@@ -306,14 +306,12 @@ if (isset($_POST['docsub1'])) {
                   $username = $row['username'];
                   $spec = $row['spec'];
                   $email = $row['email'];
-                  $password = $row['password'];
                   $docFees = $row['docFees'];
 
                   echo "<tr>
                         <td style='min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$username</td>
                         <td style='min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$spec</td>
                         <td style='min-width: 220px; max-width: 220px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$email</td>
-                        <td style='min-width: 200px; max-width: 200px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$password</td>
                         <td style='min-width: 100px; max-width: 100px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$docFees</td>
                       </tr>";
                 }
@@ -345,7 +343,6 @@ if (isset($_POST['docsub1'])) {
                   <th scope="col">Gender</th>
                   <th scope="col">Email</th>
                   <th scope="col">Contact</th>
-                  <th scope="col">Password</th>
                 </tr>
               </thead>
               <tbody>
@@ -361,7 +358,6 @@ if (isset($_POST['docsub1'])) {
                   $gender = $row['gender'];
                   $email = $row['email'];
                   $contact = $row['contact'];
-                  $password = $row['password'];
 
                   echo "<tr>
                         <td>$pid</td>
@@ -370,7 +366,6 @@ if (isset($_POST['docsub1'])) {
                         <td>$gender</td>
                         <td style='min-width: 250px; max-width: 250px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$email</td>
                         <td >$contact</td>
-                        <td style='min-width: 200px; max-width: 200px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;'>$password</td>
                       </tr>";
                 }
 
@@ -395,7 +390,7 @@ if (isset($_POST['docsub1'])) {
                       <th scope="col">Doctor</th>
                       <th scope="col">Patient ID</th>
                       <th scope="col"style="min-width: 92px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment ID</th>
-                      <th scope="col" style="min-width: 10p5x; max-width: 105px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">First Name</th>
+                      <th scope="col" style="min-width: 105px; max-width: 105px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">First Name</th>
                       <th scope="col" style="min-width: 105px; max-width: 105px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Last Name</th>
                       <th scope="col"style="min-width: 106px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Date</th>
                       <th scope="col"style="min-width: 105px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Time</th>
