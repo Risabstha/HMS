@@ -45,6 +45,8 @@ if (isset($_POST['prescribe']) && isset($_POST['pid']) && isset($_POST['ID']) &&
 
   $query = mysqli_query($con, "insert into prestb(doctor,pid,ID,fname,lname,appdate,apptime,disease,allergy,prescription) values ('$doctor','$pid','$ID','$fname','$lname','$appdate','$apptime','$disease','$allergy','$prescription')");
   if ($query) {
+      // Update doctorStatus to 3 in `appointmenttb`
+      $updateStatus = mysqli_query($con, "UPDATE appointmenttb SET doctorStatus='3' WHERE ID='$ID'");
     echo "<script>alert('Prescribed successfully!');
         window.location.href = 'doctor-panel.php';</script>";
   } else {

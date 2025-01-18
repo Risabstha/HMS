@@ -32,9 +32,19 @@ if (isset($_GET['accept'])) {
   }
 }
 
+//for appointment status prescribed by doctor (line 36 to 42 is added)
+if (isset($_GET['prescribe'])) {
+  $query = mysqli_query($con, "UPDATE appointmenttb SET doctorStatus='3' WHERE ID = '" . $_GET['ID'] . "'");
+  if ($query) {
+    echo "<script>alert('Prescription submitted successfully');</script>";
+    echo "<script>window.location.href = 'doctor-panel.php';</script>";
+  }
+}
+
+
 // Check for new appointments
 $newAppointmentsQuery = mysqli_query($con, "SELECT * FROM appointmenttb WHERE isNew = TRUE");
-if(mysqli_num_rows($newAppointmentsQuery) > 0) {
+if (mysqli_num_rows($newAppointmentsQuery) > 0) {
   echo "<script>
     document.addEventListener('DOMContentLoaded', function() {
       $('#newAppointmentModal').modal('show');
@@ -72,17 +82,17 @@ if(mysqli_num_rows($newAppointmentsQuery) > 0) {
         border-color: #522258;
       }
 
-      .filter{
-            background-color:rgb(43, 124, 45);
-            color: white;
-            border: 2px rgb(43, 124, 45);
-            border-radius: 12px;
-            text-align: center;
-            padding: 4px;
-            z-index: 1;
-            font-size: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
+      .filter {
+        background-color: rgb(43, 124, 45);
+        color: white;
+        border: 2px rgb(43, 124, 45);
+        border-radius: 12px;
+        text-align: center;
+        padding: 4px;
+        z-index: 1;
+        font-size: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
     </style>
 
     <style>
@@ -270,10 +280,20 @@ if(mysqli_num_rows($newAppointmentsQuery) > 0) {
                       if ($row['doctorStatus'] == 2) {
                         if (mysqli_num_rows($prescriptionQuery) == 0 && ($row['userStatus'] == 1)) {
                       ?>
-                          <a href="prescribe.php?pid=<?php echo $row['pid'] ?>&ID=<?php echo $row['ID'] ?>&fname=<?php echo $row['fname'] ?>&lname=<?php echo $row['lname'] ?>&appdate=<?php echo $row['appdate'] ?>&apptime=<?php echo $row['apptime'] ?>"
+
+                          <!-- <a href="prescribe.php?pid=<?php echo $row['pid'] ?>&ID=<?php echo $row['ID'] ?>&fname=<?php echo $row['fname'] ?>&lname=<?php echo $row['lname'] ?>
+                           &appdate=<?php echo $row['appdate'] ?>&apptime=<?php echo $row['apptime'] ?>"
                             tooltip-placement="top" tooltip="Remove" title="prescribe">
                             <button class="btn btn-success" id="prescribe-btn-<?php echo $row['ID'] ?>" onclick="hideButton(<?php echo $row['ID'] ?>)">Prescribe</button>
+                          </a> -->
+
+                          <!--// incase prescribed by doctor needs to be removed comment above anchor tag and uncomment the above anchor tag-->
+
+                          <a href="prescribe.php?pid=<?php echo $row['pid'] ?>&ID=<?php echo $row['ID'] ?>&fname=<?php echo $row['fname'] ?>&lname=<?php echo $row['lname'] ?>
+                          &appdate=<?php echo $row['appdate'] ?>&apptime=<?php echo $row['apptime'] ?>&prescribe=true" tooltip-placement="top" tooltip="Remove" title="prescribe">
+                            <button class="btn btn-success" id="prescribe-btn-<?php echo $row['ID'] ?>" onclick="hideButton(<?php echo $row['ID'] ?>)">Prescribe</button>
                           </a>
+
                       <?php
                         } else {
                           echo "Prescription Sent";
@@ -311,7 +331,8 @@ if(mysqli_num_rows($newAppointmentsQuery) > 0) {
                 <?php
                 $con = mysqli_connect("localhost", "root", "", "myhmsdb");
                 global $con;
-                $query = "select pid,fname,lname,ID,appdate,apptime,disease,allergy,prescription from prestb where doctor='$dname';";
+                $query = "select   pid,fname,lname,ID,appdate,apptime,disease,allergy,prescription from prestb 
+                          where doctor='$dname' ;";
                 $result = mysqli_query($con, $query);
                 if (!$result) {
                   echo mysqli_error($con);
@@ -374,7 +395,5 @@ if(mysqli_num_rows($newAppointmentsQuery) > 0) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.1/sweetalert2.all.min.js"></script>
-  </body>
+</body>
 </html>
-
-

@@ -21,12 +21,7 @@
     }
 
     if (mysqli_num_rows($result) > 0) {
-      $row = mysqli_fetch_array($result);
-
-      if ($row['name'] == "" & $row['email'] == "" & $row['contact'] == "" & $row['message'] == "") {
-        echo "<script> alert('No entries found! Please enter valid details'); 
-          window.location.href = 'admin-panel1.php#list-doc';</script>";
-      } else {
+      
         echo "<div class='container-fluid' style='margin-top:50px;'>
     <div class='card' style='border:none;'>
     <div class='card-body' style='background:-webkit-linear-gradient(left,#522258,#D95F59);color:#ffffff;'>
@@ -41,7 +36,8 @@
     </thead>
     <tbody>";
 
-
+    while ($row = mysqli_fetch_array($result)) 
+    {
         $name = $row['name'];
         $email = $row['email'];
         $contact = $row['contact'];
@@ -52,9 +48,9 @@
             <td>$contact</td>
             <td>$message</td>
           </tr>";
-
+        }
         echo "</tbody></table><center><a href='admin-panel1.php' class='btn btn-light'>Back to your Dashboard</a></div></center></div></div></div>";
-      }
+      
     } else {
       echo "<script>
         alert('No entries found!');

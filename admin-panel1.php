@@ -505,6 +505,10 @@ if (isset($_POST['docsub1'])) {
                       if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 0)) {
                         echo "Cancelled by Doctor";
                       }
+
+                      if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 3)) {
+                        echo " Prescribed by Doctor ";
+                      }
                       ?></td>
                   </tr>
                 <?php } ?>

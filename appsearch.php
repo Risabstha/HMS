@@ -22,12 +22,7 @@
     }
 
     if (mysqli_num_rows($result) > 0) {
-      $row = mysqli_fetch_array($result);
-
-      if ($row['fname'] == "" & $row['lname'] == "" & $row['email'] == "" & $row['contact'] == "" & $row['doctor'] == "" & $row['docFees'] == "" & $row['appdate'] == "" & $row['apptime'] == "") {
-        echo "<script> alert('No entries found! Please enter valid details'); 
-          window.location.href = 'admin-panel1.php#list-doc';</script>";
-      } else {
+      
         echo "<div class='container-fluid' style='margin-top:50px;'>
     <div class='card' style='border:none;'>
     <div class='card-body' style='background:-webkit-linear-gradient(left,#522258,#D95F59);color:#ffffff;'>
@@ -47,26 +42,30 @@
     </thead>
     <tbody>";
 
+        while ($row = mysqli_fetch_array($result)) 
+        {
+          $fname = $row['fname'];
+          $lname = $row['lname'];
+          $email = $row['email'];
+          $contact = $row['contact'];
+          $doctor = $row['doctor'];
+          $docFees = $row['docFees'];
+          $appdate = $row['appdate'];
+          $apptime = $row['apptime'];
+          if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 1)) {
+            $appstatus = "Active";
+          }
+          if (($row['userStatus'] == 0) && ($row['doctorStatus'] == 1)) {
+            $appstatus = "Cancelled by You";
+          }
 
-        $fname = $row['fname'];
-        $lname = $row['lname'];
-        $email = $row['email'];
-        $contact = $row['contact'];
-        $doctor = $row['doctor'];
-        $docFees = $row['docFees'];
-        $appdate = $row['appdate'];
-        $apptime = $row['apptime'];
-        if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 1)) {
-          $appstatus = "Active";
-        }
-        if (($row['userStatus'] == 0) && ($row['doctorStatus'] == 1)) {
-          $appstatus = "Cancelled by You";
-        }
-
-        if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 0)) {
-          $appstatus = "Cancelled by Doctor";
-        }
-        echo "<tr>
+          if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 0)) {
+            $appstatus = "Cancelled by Doctor";
+          }
+          if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 3)) {
+            $appstatus = "Prescribed by Doctor";
+          }
+          echo "<tr>
             <td>$fname</td>
             <td>$lname</td>
             <td>$email</td>
@@ -77,8 +76,9 @@
             <td>$apptime</td>
             <td>$appstatus</td>
           </tr>";
+        }
         echo "</tbody></table><center><a href='admin-panel1.php' class='btn btn-light'>Back to your Dashboard</a></div></center></div></div></div>";
-      }
+      
     } else {
       echo "<script>
         alert('No entries found!');
