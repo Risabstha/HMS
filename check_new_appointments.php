@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +66,8 @@
             xhr.open("GET", "check_new_prescriptions.php", true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    if (xhr.responseText == "true") {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.newAppointments) {
                         showNotification();
                     }
                 }
