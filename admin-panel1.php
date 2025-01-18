@@ -10,7 +10,7 @@ if (isset($_POST['docsub'])) {
   $doctor = $_POST['doctor'];
   $dpassword = $_POST['dpassword'];
   $demail = $_POST['demail'];
-  $spec = $_POST['special'] ??'';
+  $spec = $_POST['special'] ?? '';
   $docFees = $_POST['docFees'];
   $hashed_password = password_hash($dpassword, PASSWORD_BCRYPT);
   $query = "insert into doctb(username,password,email,spec,docFees)values('$doctor','$hashed_password','$demail','$spec','$docFees')";
@@ -77,7 +77,7 @@ if (isset($_POST['docsub1'])) {
 
     <style>
       .bg-primary {
-        background: -webkit-linear-gradient(left,#522258,#D95F59);
+        background: -webkit-linear-gradient(left, #522258, #D95F59);
       }
 
       .col-md-4 {
@@ -107,7 +107,8 @@ if (isset($_POST['docsub1'])) {
         background-color: #522258;
         border-color: #522258;
       }
-      .btn-primary:hover{
+
+      .btn-primary:hover {
         background-color: #D95F59;
         border-color: #D95F59;
       }
@@ -171,11 +172,11 @@ if (isset($_POST['docsub1'])) {
                         }
                       </script>
                       <p class="links cl-effect-1">
-                        <a href="#list-doc" style=" color: black; text-decoration: none;"   
-                                             onmouseover="this.style.color='red'" 
-                                             onmouseout="this.style.color='black'" 
-                                              onclick="clickDiv('#list-doc-list')">
-                                  <h4 class="StepTitle" style="margin-top: 5%;">Doctor List</h4>
+                        <a href="#list-doc" style=" color: black; text-decoration: none;"
+                          onmouseover="this.style.color='red'"
+                          onmouseout="this.style.color='black'"
+                          onclick="clickDiv('#list-doc-list')">
+                          <h4 class="StepTitle" style="margin-top: 5%;">Doctor List</h4>
                         </a>
                       </p>
                     </div>
@@ -189,11 +190,11 @@ if (isset($_POST['docsub1'])) {
                       <!-- <h4 class="StepTitle" style="margin-top: 5%;">Patient List</h4> -->
 
                       <p class="cl-effect-1">
-                        <a href="#app-hist" style=" color: black; text-decoration: none;"   
-                                             onmouseover="this.style.color='red'" 
-                                             onmouseout="this.style.color='black'" 
-                                             onclick="clickDiv('#list-pat-list')">
-                                 <h4 class="StepTitle" style="margin-top: 5%;">Patient List</h4>
+                        <a href="#app-hist" style=" color: black; text-decoration: none;"
+                          onmouseover="this.style.color='red'"
+                          onmouseout="this.style.color='black'"
+                          onclick="clickDiv('#list-pat-list')">
+                          <h4 class="StepTitle" style="margin-top: 5%;">Patient List</h4>
                         </a>
                       </p>
                     </div>
@@ -208,11 +209,11 @@ if (isset($_POST['docsub1'])) {
                       <!-- <h4 class="StepTitle" style="margin-top: 5%;">Appointment Details</h4> -->
 
                       <p class="cl-effect-1">
-                        <a href="#app-hist" style=" color: black; text-decoration: none;"   
-                                             onmouseover="this.style.color='red'" 
-                                             onmouseout="this.style.color='black'"
-                                             onclick="clickDiv('#list-app-list')">
-                                  <h4 class="StepTitle" style="margin-top: 5%;">Appointment Details</h4>
+                        <a href="#app-hist" style=" color: black; text-decoration: none;"
+                          onmouseover="this.style.color='red'"
+                          onmouseout="this.style.color='black'"
+                          onclick="clickDiv('#list-app-list')">
+                          <h4 class="StepTitle" style="margin-top: 5%;">Appointment Details</h4>
                         </a>
                       </p>
                     </div>
@@ -228,11 +229,11 @@ if (isset($_POST['docsub1'])) {
                       <!-- <h4 class="StepTitle" style="margin-top: 5%;">Prescription List</h4> -->
 
                       <p class="cl-effect-1">
-                        <a href="#list-pres" style=" color: black; text-decoration: none;"   
-                                             onmouseover="this.style.color='red'" 
-                                             onmouseout="this.style.color='black'"
-                                              onclick="clickDiv('#list-pres-list')">
-                                <h4 class="StepTitle" style="margin-top: 5%;">Prescription List</h4>
+                        <a href="#list-pres" style=" color: black; text-decoration: none;"
+                          onmouseover="this.style.color='red'"
+                          onmouseout="this.style.color='black'"
+                          onclick="clickDiv('#list-pres-list')">
+                          <h4 class="StepTitle" style="margin-top: 5%;">Prescription List</h4>
                         </a>
                       </p>
                     </div>
@@ -247,15 +248,15 @@ if (isset($_POST['docsub1'])) {
                       <h4 class="StepTitle" style="margin-top: 5%;">Manage Doctors</h4>
 
                       <p class="cl-effect-1">
-                        <a href="#app-hist" style=" color: blue; text-decoration: none;"   
-                                             onmouseover="this.style.color='red'" 
-                                             onmouseout="this.style.color='blue'"
-                                              onclick="clickDiv('#list-adoc-list')">Add Doctors</a>
+                        <a href="#app-hist" style=" color: blue; text-decoration: none;"
+                          onmouseover="this.style.color='red'"
+                          onmouseout="this.style.color='blue'"
+                          onclick="clickDiv('#list-adoc-list')">Add Doctors</a>
                         &nbsp|
-                        <a href="#app-hist" style=" color: blue; text-decoration: none;"   
-                                             onmouseover="this.style.color='red'" 
-                                             onmouseout="this.style.color='blue'"
-                                              onclick="clickDiv('#list-ddoc-list')">Delete Doctors</a>
+                        <a href="#app-hist" style=" color: blue; text-decoration: none;"
+                          onmouseover="this.style.color='red'"
+                          onmouseout="this.style.color='blue'"
+                          onclick="clickDiv('#list-ddoc-list')">Delete Doctors</a>
                       </p>
                     </div>
                   </div>
@@ -290,10 +291,10 @@ if (isset($_POST['docsub1'])) {
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col" >Doctor Name</th>
-                  <th scope="col" >Specialization</th>
-                  <th scope="col" >Email</th>
-                  <th scope="col" >Fees</th>
+                  <th scope="col">Doctor Name</th>
+                  <th scope="col">Specialization</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Fees</th>
                 </tr>
               </thead>
               <tbody>
@@ -389,13 +390,13 @@ if (isset($_POST['docsub1'])) {
                     <tr>
                       <th scope="col">Doctor</th>
                       <th scope="col">Patient ID</th>
-                      <th scope="col"style="min-width: 92px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment ID</th>
+                      <th scope="col" style="min-width: 92px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment ID</th>
                       <th scope="col" style="min-width: 105px; max-width: 105px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">First Name</th>
                       <th scope="col" style="min-width: 105px; max-width: 105px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Last Name</th>
-                      <th scope="col"style="min-width: 106px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Date</th>
-                      <th scope="col"style="min-width: 105px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Time</th>
+                      <th scope="col" style="min-width: 106px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Date</th>
+                      <th scope="col" style="min-width: 105px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Time</th>
                       <th scope="col" style="min-width: 140px; max-width: 140px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Disease</th>
-                      <th scope="col"style="min-width: 175px; max-width: 175px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Allergy</th>
+                      <th scope="col" style="min-width: 175px; max-width: 175px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Allergy</th>
                       <th scope="col" style="min-width: 215px; max-width: 215px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Prescription</th>
                     </tr>
                   </thead>
@@ -457,7 +458,7 @@ if (isset($_POST['docsub1'])) {
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col"style="min-width: 92px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment ID</th>
+                  <th scope="col" style="min-width: 92px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment ID</th>
                   <th scope="col">P.ID</th>
                   <th scope="col" style="min-width: 100px; max-width: 100px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">First Name</th>
                   <th scope="col" style="min-width: 90px; max-width: 90px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Last Name</th>
@@ -466,8 +467,8 @@ if (isset($_POST['docsub1'])) {
                   <th scope="col">Contact</th>
                   <th scope="col">Doctor Name</th>
                   <th scope="col">Doctor Fees</th>
-                  <th scope="col"style="min-width: 106px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Date</th>
-                  <th scope="col"style="min-width: 105px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Time</th>
+                  <th scope="col" style="min-width: 106px; max-width: 156px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Date</th>
+                  <th scope="col" style="min-width: 105px; max-width: 150px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">Appoint-ment Time</th>
                   <th scope="col">Appointment Status</th>
                 </tr>
               </thead>

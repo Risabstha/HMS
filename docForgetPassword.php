@@ -195,14 +195,14 @@ if (isset($_POST['check-email'])) {
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="email" class="form-control"
-                                    style="margin-left:10%; margin-top:6%; margin-right:10%; width:80%;"        
-                                    placeholder="Enter your email.." name="email" required value="<?php echo $email ?>" />
+                                        style="margin-left:10%; margin-top:6%; margin-right:10%; width:80%;"
+                                        placeholder="Enter your email.." name="email" required value="<?php echo $email ?>" />
 
                                 </div>
 
                             </div>
-                                <input type="submit" class="btnRegister" style="margin-top: 4%; margin-left:25%;" name="check-email" value="submit" />
-                            
+                            <input type="submit" class="btnRegister" style="margin-top: 4%; margin-left:25%;" name="check-email" value="submit" />
+
                         </div>
                     </form>
                 </div>

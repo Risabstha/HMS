@@ -1,50 +1,55 @@
-
-
 html {
-  overflow-y: scroll; 
+    overflow-y: scroll;
 }
 
 .focus {
     color: white;
- 
+
 }
 
 .focus:hover {
     color: #522258;
- 
+
 }
 
- 
-.contact-form{
+
+.contact-form {
     background: #ffffff;
     margin-top: 10%;
     margin-bottom: 5%;
-    width: 70%; 
+    width: 70%;
 }
-.contact-form .form-control{
-    border-radius:1rem;
+
+.contact-form .form-control {
+    border-radius: 1rem;
 }
-.contact-image{
+
+.contact-image {
     text-align: center;
 }
-.contact-image img{
+
+.contact-image img {
     border-radius: 6rem;
     width: 11%;
     margin-top: -4%;
     transform: rotate(29deg);
 }
-.contact-form form{
+
+.contact-form form {
     padding: 14%;
 }
-.contact-form form .row{
+
+.contact-form form .row {
     margin-bottom: -7%;
 }
-.contact-form h3{
+
+.contact-form h3 {
     margin-bottom: 8%;
     margin-top: -13%;
     text-align: center;
-    color: #522258  ;
+    color: #522258;
 }
+
 .contact-form .btnContact {
     width: 50%;
     border: none;
@@ -56,8 +61,8 @@ html {
     cursor: pointer;
 
 }
-.btnContactSubmit
-{
+
+.btnContactSubmit {
     width: 50%;
     border-radius: 1rem;
     padding: 1.5%;
@@ -67,13 +72,14 @@ html {
     cursor: pointer;
 }
 
-.btnContact{
-     margin-left: 50%;
+.btnContact {
+    margin-left: 50%;
 }
 
-.btn-focus{
+.btn-focus {
     background-color: #522258;
 }
-.btn-focus:hover{
+
+.btn-focus:hover {
     background-color: #D95F59;
 }

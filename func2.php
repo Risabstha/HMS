@@ -2,54 +2,50 @@
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
-$con=mysqli_connect("localhost","root","","myhmsdb");
-if(isset($_POST['patsub1'])){
-	$fname=$_POST['fname'];
-  $lname=$_POST['lname'];
-  $gender=$_POST['gender'];
-  $email=$_POST['email'];
-  $contact=$_POST['contact'];
-	$password=$_POST['password'];
-  $cpassword=$_POST['cpassword'];
-  if($password==$cpassword){
+$con = mysqli_connect("localhost", "root", "", "myhmsdb");
+if (isset($_POST['patsub1'])) {
+  $fname = $_POST['fname'];
+  $lname = $_POST['lname'];
+  $gender = $_POST['gender'];
+  $email = $_POST['email'];
+  $contact = $_POST['contact'];
+  $password = $_POST['password'];
+  $cpassword = $_POST['cpassword'];
+  if ($password == $cpassword) {
     // Hash the password
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-    $hashed_cpassword = password_hash($cpassword, PASSWORD_BCRYPT);    
-  	$query="insert into patreg(fname,lname,gender,email,contact,password,cpassword) values ('$fname','$lname','$gender','$email','$contact','$hashed_password','$hashed_cpassword')";
-    $result=mysqli_query($con,$query);
-    if($result){
-        $_SESSION['username'] = $_POST['fname']." ".$_POST['lname'];
-        $_SESSION['fname'] = $_POST['fname'];
-        $_SESSION['lname'] = $_POST['lname'];
-        $_SESSION['gender'] = $_POST['gender'];
-        $_SESSION['contact'] = $_POST['contact'];
-        $_SESSION['email'] = $_POST['email'];
-        header("Location:admin-panel.php");
-    } 
-    else {
+    $hashed_cpassword = password_hash($cpassword, PASSWORD_BCRYPT);
+    $query = "insert into patreg(fname,lname,gender,email,contact,password,cpassword) values ('$fname','$lname','$gender','$email','$contact','$hashed_password','$hashed_cpassword')";
+    $result = mysqli_query($con, $query);
+    if ($result) {
+      $_SESSION['username'] = $_POST['fname'] . " " . $_POST['lname'];
+      $_SESSION['fname'] = $_POST['fname'];
+      $_SESSION['lname'] = $_POST['lname'];
+      $_SESSION['gender'] = $_POST['gender'];
+      $_SESSION['contact'] = $_POST['contact'];
+      $_SESSION['email'] = $_POST['email'];
+      header("Location:admin-panel.php");
+    } else {
       echo "Error: " . mysqli_error($con);
-  }
+    }
     $query1 = "select * from patreg;";
-    $result1 = mysqli_query($con,$query1);
-    if($result1){
+    $result1 = mysqli_query($con, $query1);
+    if ($result1) {
       $_SESSION['pid'] = $row['pid'];
     }
-
-  }
-  else{
+  } else {
     header("Location:error1.php");
   }
 }
-if(isset($_POST['update_data']))
-{
+if (isset($_POST['update_data'])) {
   $contact = mysqli_real_escape_string($con, $_POST['contact']);
   $status = mysqli_real_escape_string($con, $_POST['status']);
-	$query="update appointmenttb set payment='$status' where contact='$contact';";
-	$result=mysqli_query($con,$query);
-	if($result)
-		header("Location:updated.php");
-    else {
-      echo "Error: " . mysqli_error($con);
+  $query = "update appointmenttb set payment='$status' where contact='$contact';";
+  $result = mysqli_query($con, $query);
+  if ($result)
+    header("Location:updated.php");
+  else {
+    echo "Error: " . mysqli_error($con);
   }
 }
 
@@ -69,16 +65,16 @@ if(isset($_POST['update_data']))
 // 	}
 // }
 
-if(isset($_POST['doc_sub']))
-{
-	$name=$_POST['name'];
-	$query="insert into doctb(name)values('$name')";
-	$result=mysqli_query($con,$query);
-	if($result)
-		header("Location:adddoc.php");
+if (isset($_POST['doc_sub'])) {
+  $name = $_POST['name'];
+  $query = "insert into doctb(name)values('$name')";
+  $result = mysqli_query($con, $query);
+  if ($result)
+    header("Location:adddoc.php");
 }
-function display_admin_panel(){
-	echo '<!DOCTYPE html>
+function display_admin_panel()
+{
+  echo '<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -234,4 +230,3 @@ function display_admin_panel(){
   </body>
 </html>';
 }
-?>

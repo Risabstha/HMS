@@ -193,13 +193,15 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
--- Add doctorStatus column to appointmenttb
-ALTER TABLE appointmenttb ADD COLUMN doctorStatus INT DEFAULT 1;
+-- Check if the column doctorStatus exists before attempting to add it
+ALTER TABLE appointmenttb ADD COLUMN IF NOT EXISTS doctorStatus INT DEFAULT 1;
 
--- Add foreign keys to prestb
-ALTER TABLE prestb 
-ADD CONSTRAINT fk_pres_pid FOREIGN KEY (pid) REFERENCES patienttb(ID),
-ADD CONSTRAINT fk_pres_appointment FOREIGN KEY (ID) REFERENCES appointmenttb(ID);
+
+-- -- Add foreign keys to prestb
+-- ALTER TABLE prestb 
+-- ADD CONSTRAINT fk_pres_pid FOREIGN KEY (pid) REFERENCES patienttb(ID),
+-- ADD CONSTRAINT fk_pres_appointment FOREIGN KEY (ID) REFERENCES appointmenttb(ID);
+
 
 -- Add isNew column to prestb
 ALTER TABLE prestb ADD COLUMN isNew BOOLEAN DEFAULT TRUE;

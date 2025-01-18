@@ -13,21 +13,21 @@ if (isset($_POST['docsub1'])) {
   $result = mysqli_query($con, $query);
 
   if (mysqli_num_rows($result) == 1) {
-      $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-      // Use password_verify to check the entered password
-      if (password_verify($dpass, $row['password'])) {
-          // Set session variables
-          $_SESSION['dname'] = $row['username'];
+    // Use password_verify to check the entered password
+    if (password_verify($dpass, $row['password'])) {
+      // Set session variables
+      $_SESSION['dname'] = $row['username'];
 
-          // Redirect to doctor panel
-          header("Location:doctor-panel.php");
-      } else {
-          echo "<script>alert('Invalid Username or Password. Try Again!');
-                window.location.href = 'index.php';</script>";
-      }
-  } else {
+      // Redirect to doctor panel
+      header("Location:doctor-panel.php");
+    } else {
       echo "<script>alert('Invalid Username or Password. Try Again!');
+                window.location.href = 'index.php';</script>";
+    }
+  } else {
+    echo "<script>alert('Invalid Username or Password. Try Again!');
             window.location.href = 'index.php';</script>";
   }
 }
@@ -43,21 +43,20 @@ if (isset($_POST['docsub1'])) {
 //   }
 //   else
 //     header("Location:error2.php");
-  
+
 
 
 
 function display_docs()
 {
-	global $con;
-	$query="select * from doctb";
-	$result=mysqli_query($con,$query);
-	while($row=mysqli_fetch_array($result))
-	{
-		$name=$row['name'];
-		# echo'<option value="" disabled selected>Select Doctor</option>';
-		echo '<option value="'.$name.'">'.$name.'</option>';
-	}
+  global $con;
+  $query = "select * from doctb";
+  $result = mysqli_query($con, $query);
+  while ($row = mysqli_fetch_array($result)) {
+    $name = $row['name'];
+    # echo'<option value="" disabled selected>Select Doctor</option>';
+    echo '<option value="' . $name . '">' . $name . '</option>';
+  }
 }
 
 // if(isset($_POST['doc_sub']))
@@ -70,8 +69,9 @@ function display_docs()
 // }
 
 
-function display_admin_panel(){
-	echo '<!DOCTYPE html>
+function display_admin_panel()
+{
+  echo '<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -226,4 +226,3 @@ function display_admin_panel(){
   </body>
 </html>';
 }
-?>

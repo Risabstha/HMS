@@ -12,4 +12,3 @@ if (mysqli_num_rows($new_prescriptions_query) > 0) {
 } else {
     echo "false";
 }
-?>
