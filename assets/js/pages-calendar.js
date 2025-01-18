@@ -61,6 +61,11 @@ var Calendar = function() {
             $(".event-categories[value='job']").prop('checked', true);
         });
 
+<<<<<<< HEAD
+				var $category = $(this).attr('data-class');
+
+				// we need to copy it, so that multiple events don't have a reference to the same object
+=======
         $('#event-categories div.event-category').each(function() {
             var eventObject = {
                 title: $.trim($(this).text())
@@ -72,6 +77,7 @@ var Calendar = function() {
                 revertDuration: 50
             });
         });
+>>>>>>> MasterMain
 
         $('#full-calendar').fullCalendar({
             buttonIcons: {
@@ -173,6 +179,106 @@ var Calendar = function() {
         });
     };
 
+<<<<<<< HEAD
+		var formEvent = $('.form-full-event');
+
+		formEvent.validate({
+			errorElement: "span", // contain the error msg in a span tag
+			errorClass: 'help-block',
+
+			ignore: "",
+			rules: {
+				eventName: {
+					minlength: 2,
+					required: true
+				},
+				eventStartDate: {
+					required: true,
+					date: true
+				},
+				eventEndDate: {
+					required: true,
+					date: true
+				}
+			},
+			messages: {
+				eventName: "* Please specify the event title"
+
+			},
+			highlight: function(element) {
+				$(element).closest('.help-block').removeClass('valid');
+				// display OK icon
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+				// add the Bootstrap error class to the control group
+			},
+			unhighlight: function(element) {// revert the change done by hightlight
+				$(element).closest('.form-group').removeClass('has-error');
+				// set error class to the control group
+			},
+			success: function(label, element) {
+				label.addClass('help-block valid');
+				// mark the current input as valid and display OK icon
+				$(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+			},
+			submitHandler: function(form) {
+				var newEvent = new Object;
+				newEvent.title = $(".form-full-event #event-name ").val();
+				newEvent.start = new Date($('.form-full-event #start-date-time').val());
+				newEvent.end = new Date($('.form-full-event #end-date-time').val());
+				newEvent.category = $(".form-full-event .event-categories:checked").val();
+				newEvent.className = 'event-' + $(".form-full-event .event-categories:checked").val();
+
+
+				if($(".form-full-event #event-id").val() !== "") {
+					el = $(".form-full-event #event-id").val();
+					var actual_event = $('#full-calendar').fullCalendar('clientEvents', el);
+					actual_event = actual_event[0];
+					for(var i = 0; i < demoCalendar.length; i++) {
+						if(demoCalendar[i]._id == el) {
+							newEvent._id = el;
+							var eventIndex = i;
+						}
+					}
+
+					$('#full-calendar').fullCalendar('removeEvents', actual_event._id);
+					$('#full-calendar').fullCalendar('renderEvent', newEvent, true);
+
+					demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
+
+
+
+				} else {
+
+					$('#full-calendar').fullCalendar('renderEvent', newEvent, true);
+					demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
+				}
+				$('.events-modal').modal('hide');
+
+			}
+		});
+	};
+
+	var eventInputDateHandler = function() {
+		var startInput = $('#start-date-time');
+		var endInput = $('#end-date-time');
+		startInput.datetimepicker();
+		endInput.datetimepicker();
+		startInput.on("dp.change", function(e) {
+			endInput.data("DateTimePicker").minDate(e.date);
+		});
+		endInput.on("dp.change", function(e) {
+			startInput.data("DateTimePicker").maxDate(e.date);
+		});
+	};
+	return {
+		init: function() {
+			setFullCalendarEvents();
+			runFullCalendar();
+			runFullCalendarValidation();
+		}
+	};
+}();
+=======
     return {
         init: function() {
             setFullCalendarEvents();
@@ -180,3 +286,4 @@ var Calendar = function() {
         }
     };
 }();
+>>>>>>> MasterMain

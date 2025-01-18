@@ -1,13 +1,16 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
     <style>
         .notification {
             visibility: hidden;
             min-width: 300px;
             margin-left: -150px;
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50;
+            /* Green */
             color: white;
             text-align: center;
             border-radius: 2px;
@@ -27,26 +30,55 @@
         }
 
         @-webkit-keyframes fadein {
-            from {bottom: 0; opacity: 0;} 
-            to {bottom: 30px; opacity: 1;}
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
         }
 
         @keyframes fadein {
-            from {bottom: 0; opacity: 0;}
-            to {bottom: 30px; opacity: 1;}
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
         }
 
         @-webkit-keyframes fadeout {
-            from {bottom: 30px; opacity: 1;} 
-            to {bottom: 0; opacity: 0;}
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
         }
 
         @keyframes fadeout {
-            from {bottom: 30px; opacity: 1;}
-            to {bottom: 0; opacity: 0;}
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
         }
     </style>
 </head>
+
 <body>
     <div id="notification" class="notification">
         You have a new prescription from your doctor.
@@ -58,7 +90,9 @@
             var sound = document.getElementById("notificationSound");
             notification.className = "notification show";
             sound.play();
-            setTimeout(function(){ notification.className = notification.className.replace("show", ""); }, 3000);
+            setTimeout(function() {
+                notification.className = notification.className.replace("show", "");
+            }, 3000);
         }
 
         function checkForNewPrescriptions() {
@@ -77,20 +111,22 @@
 
         setInterval(checkForNewPrescriptions, 5000); // Check every 5 seconds
     </script>
-<?php
-session_start();
-$con = mysqli_connect("localhost", "root", "", "myhmsdb");
+    <?php
+    session_start();
+    $con = mysqli_connect("localhost", "root", "", "myhmsdb");
 
-$dname = $_SESSION['dname'];
+    $dname = $_SESSION['dname'];
 
-$new_appointments_query = mysqli_query($con, "SELECT * FROM appointmenttb WHERE doctor='$dname' AND isNew=TRUE");
-if (mysqli_num_rows($new_appointments_query) > 0) {
-    echo "true";
-    // Mark appointments as seen
-    mysqli_query($con, "UPDATE appointmenttb SET isNew=FALSE WHERE doctor='$dname' AND isNew=TRUE");
-} else {
-    echo "false";
-}
-?>
+    $new_appointments_query = mysqli_query($con, "SELECT * FROM appointmenttb WHERE doctor='$dname' AND isNew=TRUE");
+    if (mysqli_num_rows($new_appointments_query) > 0) {
+        echo "true";
+        // Mark appointments as seen
+        mysqli_query($con, "UPDATE appointmenttb SET isNew=FALSE WHERE doctor='$dname' AND isNew=TRUE");
+    } else {
+        echo "false";
+    }
+    ?>
 </body>
+
 </html>
+
