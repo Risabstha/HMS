@@ -1,19 +1,108 @@
 <!DOCTYPE html>
-<?php 
+<html>
+<head>
+    <style>
+        .notification {
+            visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color:#46942c ;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        transition: visibility 0s, opacity 0.5s linear;
+        }
+
+        .notification.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.8s, fadeout 0.8s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+    <div id="notification" class="notification">
+        You have a new prescription from your doctor.
+    </div>
+    <audio id="notificationSound" src="sounds/notification.mp3" preload="auto"></audio>
+    <script>
+        function showNotification() {
+            var notification = document.getElementById("notification");
+            var notificationSound = document.getElementById("notificationSound");
+            notification.className = "notification show";
+            notificationSound.play();
+            setTimeout(function(){ notification.className = notification.className.replace("show", ""); }, 3000);
+        }
+
+        function checkForNewPrescriptions() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "check_new_prescriptions.php", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.responseText == "true") {
+                        showNotification();
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        setInterval(checkForNewPrescriptions, 4000); // Check every 4 seconds
+    </script>
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include('func.php');  
 include('newfunc.php');
 $con=mysqli_connect("localhost","root","","myhmsdb");
 
+$pid = $_SESSION['pid'];
+$username = $_SESSION['username'];
+$email = $_SESSION['email'];
+$fname = $_SESSION['fname'];
+$gender = $_SESSION['gender'];
+$lname = $_SESSION['lname'];
+$contact = $_SESSION['contact'];
 
-  $pid = $_SESSION['pid'];
-  $username = $_SESSION['username'];
-  $email = $_SESSION['email'];
-  $fname = $_SESSION['fname'];
-  $gender = $_SESSION['gender'];
-  $lname = $_SESSION['lname'];
-  $contact = $_SESSION['contact'];
-
-
+// Check for new prescriptions on page load
+if (!isset($_SESSION['new_prescription_alert_shown'])) {
+    $new_prescriptions_query = mysqli_query($con, "SELECT * FROM prestb WHERE pid='$pid' AND isNew=TRUE");
+    if (mysqli_num_rows($new_prescriptions_query) > 0) {
+        echo "<script>showNotification();</script>";
+        // Mark prescriptions as seen
+        mysqli_query($con, "UPDATE prestb SET isNew=FALSE WHERE pid='$pid' AND isNew=TRUE");
+        // Set session variable to indicate the alert has been shown
+        $_SESSION['new_prescription_alert_shown'] = true;
+    }
+}
 
 if(isset($_POST['app-submit']))
 {
@@ -26,7 +115,6 @@ if(isset($_POST['app-submit']))
   $contact = $_SESSION['contact'];
   $doctor=$_POST['doctor'];
   $email=$_SESSION['email'];
-  # $fees=$_POST['fees'];
   $docFees=$_POST['docFees'];
 
   $appdate=$_POST['appdate'];
@@ -47,6 +135,8 @@ if(isset($_POST['app-submit']))
           if($query)
           {
             echo "<script>alert('Your appointment successfully booked');</script>";
+            header("Location: admin-panel.php");
+            exit();
           }
           else{
             echo "<script>alert('Unable to process your request. Please try again!');</script>";
@@ -57,11 +147,11 @@ if(isset($_POST['app-submit']))
       }
     }
     else{
-      echo "<script>alert('Select a time or date in the future!');</script>";
+      echo "<script>alert('Past dates cannot be selected!');</script>";
     }
   }
   else{
-      echo "<script>alert('Select a time or date in the future!');</script>";
+      echo "<script>alert('Past dates cannot be selected!');</script>";
   }
   
 }
@@ -72,12 +162,10 @@ if(isset($_GET['cancel']))
     if($query)
     {
       echo "<script>alert('Your appointment successfully cancelled');</script>";
+      header("Location: admin-panel.php");
+      exit();
     }
   }
-
-
-
-
 
 function generate_bill(){
   $con=mysqli_connect("localhost","root","","myhmsdb");
@@ -85,7 +173,7 @@ function generate_bill(){
   $output='';
   $query=mysqli_query($con,"select p.pid,p.ID,p.fname,p.lname,p.doctor,p.appdate,p.apptime,p.disease,p.allergy,p.prescription,a.docFees from prestb p inner join appointmenttb a on p.ID=a.ID and p.pid = '$pid' and p.ID = '".$_GET['ID']."'");
   while($row = mysqli_fetch_array($query)){
-    $output .= '
+    $output .= ' 
     <label> Patient ID : </label>'.$row["pid"].'<br/><br/>
     <label> Appointment ID : </label>'.$row["ID"].'<br/><br/>
     <label> Patient Name : </label>'.$row["fname"].' '.$row["lname"].'<br/><br/>
@@ -96,6 +184,7 @@ function generate_bill(){
     <label> Allergies : </label>'.$row["allergy"].'<br/><br/>
     <label> Prescription : </label>'.$row["prescription"].'<br/><br/>
     <label> Fees Paid : </label>'.$row["docFees"].'<br/>
+   
     
     ';
 
@@ -108,6 +197,7 @@ function generate_bill(){
 if(isset($_GET["generate_bill"])){
   require_once("TCPDF/tcpdf.php");
   $obj_pdf = new TCPDF('P',PDF_UNIT,PDF_PAGE_FORMAT,true,'UTF-8',false);
+
   $obj_pdf -> SetCreator(PDF_CREATOR);
   $obj_pdf -> SetTitle("Generate Bill");
   $obj_pdf -> SetHeaderData('','',PDF_HEADER_TITLE,PDF_HEADER_STRING);
@@ -115,7 +205,7 @@ if(isset($_GET["generate_bill"])){
   $obj_pdf -> SetFooterFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
   $obj_pdf -> SetDefaultMonospacedFont('helvetica');
   $obj_pdf -> SetFooterMargin(PDF_MARGIN_FOOTER);
-  $obj_pdf -> SetMargins(PDF_MARGIN_LEFT,'5',PDF_MARGIN_RIGHT);
+  $obj_pdf -> SetMargins(PDF_MARGIN_LEFT,'95',PDF_MARGIN_RIGHT);
   $obj_pdf -> SetPrintHeader(false);
   $obj_pdf -> SetPrintFooter(false);
   $obj_pdf -> SetAutoPageBreak(TRUE, 10);
@@ -126,7 +216,7 @@ if(isset($_GET["generate_bill"])){
 
   $content .= '
       <br/>
-      <h2 align ="center"> Global Hospitals</h2></br>
+      <h2 align ="center"> advanced patient care solution</h2></br>
       <h3 align ="center"> Bill</h3>
       
 
@@ -421,21 +511,22 @@ function get_specs(){
                               <input class="form-control" type="text" name="docFees" id="docFees" readonly="readonly"/>
                   </div><br><br>
 
-                  <div class="col-md-4"><label>Appointment Date</label></div>
-                  <div class="col-md-8"><input type="date" class="form-control datepicker" name="appdate"></div><br><br>
+                  <div class="col-md-4"><label>Appointment Date:</label></div>
+                  <div class="col-md-8"><input type="date" class="form-control" name="appdate" required></div><br><br>
 
-                  <div class="col-md-4"><label>Appointment Time</label></div>
+                  <div class="col-md-4"><label>Appointment Time:</label></div>
                   <div class="col-md-8">
-                    <!-- <input type="time" class="form-control" name="apptime"> -->
-                    <select name="apptime" class="form-control" id="apptime" required="required">
-                      <option value="" disabled selected>Select Time</option>
-                      <option value="08:00:00">8:00 AM</option>
-                      <option value="10:00:00">10:00 AM</option>
-                      <option value="12:00:00">12:00 PM</option>
-                      <option value="14:00:00">2:00 PM</option>
-                      <option value="16:00:00">4:00 PM</option>
+                    <select class="form-control" name="apptime" required>
+                      <option value="08:00">08:00 AM</option>
+                      <option value="09:00">09:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="11:00">11:00 AM</option>
+                      <option value="12:00">12:00 PM</option>
+                      <option value="13:00">01:00 PM</option>
+                      <option value="14:00">02:00 PM</option>
+                      <option value="15:00">03:00 PM</option>
+                      <option value="16:00">04:00 PM</option>
                     </select>
-
                   </div><br><br>
 
                   <div class="col-md-4">
@@ -484,38 +575,42 @@ function get_specs(){
                         <td><?php echo $row['appdate'];?></td>
                         <td><?php echo $row['apptime'];?></td>
                         
-                          <td>
-                    <?php if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
-                    {
-                      echo "Active";
-                    }
-                    if(($row['userStatus']==0) && ($row['doctorStatus']==1))  
-                    {
-                      echo "Cancelled by You";
-                    }
-
-                    if(($row['userStatus']==1) && ($row['doctorStatus']==0))  
-                    {
-                      echo "Cancelled by Doctor";
-                    }
-                        ?></td>
-
                         <td>
-                        <?php if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
-                        { ?>
+                        <?php 
+if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 1)) {
+    echo "Active";
+} elseif (($row['userStatus'] == 0) && ($row['doctorStatus'] == 1)) {
+    echo "Cancelled by You";
+} elseif (($row['userStatus'] == 1) && ($row['doctorStatus'] == 0)) {
+    echo "Cancelled by Doctor";
+} elseif (($row['doctorStatus'] == 2)) {
+    echo "Accepted by Doctor";
+} else {
+    echo "Pending";
+}
+?>
+</td>
 
-													
-	                        <a href="admin-panel.php?ID=<?php echo $row['ID']?>&cancel=update" 
-                              onClick="return confirm('Are you sure you want to cancel this appointment ?')"
-                              title="Cancel Appointment" tooltip-placement="top" tooltip="Remove"><button class="btn btn-danger">Cancel</button></a>
-	                        <?php } else {
+<td>
+<?php 
+if (($row['userStatus'] == 1) && ($row['doctorStatus'] == 1)) { 
+?>
+    <a href="admin-panel.php?ID=<?php echo $row['ID']?>&cancel=update" 
+       onClick="return confirm('Are you sure you want to cancel this appointment ?')"
+       title="Cancel Appointment" tooltip-placement="top" tooltip="Remove">
+       <button class="btn btn-danger">Cancel</button>
+    </a>
+<?php 
+} elseif ($row['doctorStatus'] == 2) { 
+    echo ""; // Show nothing when accepted by the doctor
+} else { 
+    echo "Cancelled";
+} 
+?>
+</td>
+</tr>
+<?php } ?>
 
-                                echo "Cancelled";
-                                } ?>
-                        
-                        </td>
-                      </tr>
-                    <?php } ?>
                 </tbody>
               </table>
         <br>
