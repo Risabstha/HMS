@@ -12,7 +12,7 @@ if (isset($_SESSION['dname'])) {
   $doctor = $_SESSION['dname'];
 } else {
   // If the session variable is not set, redirect to login or show an error
-  echo "<script>alert('Session expired or user not logged in'); window.location='index.php';</script>";
+  echo "<script> window.location='doctor-panel.php';</script>";
   exit();
 }
 
@@ -71,6 +71,18 @@ if(mysqli_num_rows($newAppointmentsQuery) > 0) {
         background-color: #522258;
         border-color: #522258;
       }
+
+      .filter{
+            background-color:rgb(43, 124, 45);
+            color: white;
+            border: 2px rgb(43, 124, 45);
+            border-radius: 12px;
+            text-align: center;
+            padding: 4px;
+            z-index: 1;
+            font-size: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 
     <style>
@@ -347,18 +359,10 @@ if(mysqli_num_rows($newAppointmentsQuery) > 0) {
     <!-- New Appointment Modal -->
     <div class="modal fade" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="newAppointmentModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="newAppointmentModalLabel">New Appointment Notification</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
+        <div class="modal-content filter">
+
+          <div class="modal-body ">
             You have new appointment(s) booked!
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
           </div>
         </div>
       </div>

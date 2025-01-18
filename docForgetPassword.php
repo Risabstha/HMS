@@ -6,7 +6,9 @@ require 'vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+  }
 $con = mysqli_connect("localhost", "root", "", "myhmsdb");
 if (!$con) {
     die("Database connection failed: " . mysqli_connect_error());

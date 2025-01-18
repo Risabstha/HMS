@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
   <style>
     .notification {
       visibility: hidden;
@@ -18,13 +19,13 @@
       bottom: 30px;
       font-size: 17px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-      transition: visibility 0s, opacity 0.5s linear;
+      transition: visibility 0s linear 6s, opacity 0.5s linear;
     }
 
     .notification.show {
       visibility: visible;
-      -webkit-animation: fadein 0.5s, fadeout 0.5s 4s;
-      animation: fadein 0.8s, fadeout 0.8s 4s;
+      -webkit-animation: fadein 0.5s, fadeout 0.5s 6s;
+      animation: fadein 0.8s, fadeout 0.8s 6s;
     }
 
     @-webkit-keyframes fadein {

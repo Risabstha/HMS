@@ -112,7 +112,9 @@
         setInterval(checkForNewPrescriptions, 5000); // Check every 5 seconds
     </script>
     <?php
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+      }
     $con = mysqli_connect("localhost", "root", "", "myhmsdb");
 
     $dname = $_SESSION['dname'];
