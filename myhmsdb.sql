@@ -58,7 +58,8 @@ CREATE TABLE `appointmenttb` (
   `appdate` date NOT NULL,
   `apptime` time NOT NULL,
   `userStatus` int(5) NOT NULL,
-  `doctorStatus` int(5) NOT NULL
+  `doctorStatus` int(5) NOT NULL,
+  `isNew` BOOLEAN DEFAULT TRUE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -192,3 +193,13 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- Add doctorStatus column to appointmenttb
+ALTER TABLE appointmenttb ADD COLUMN doctorStatus INT DEFAULT 1;
+
+-- Add foreign keys to prestb
+ALTER TABLE prestb 
+ADD CONSTRAINT fk_pres_pid FOREIGN KEY (pid) REFERENCES patienttb(ID),
+ADD CONSTRAINT fk_pres_appointment FOREIGN KEY (ID) REFERENCES appointmenttb(ID);
+
+-- Add isNew column to prestb
+ALTER TABLE prestb ADD COLUMN isNew BOOLEAN DEFAULT TRUE;

@@ -4,6 +4,8 @@ if(session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 include('func1.php');
+include('func.php');  
+include('newfunc.php');
 $con=mysqli_connect("localhost","root","","myhmsdb");
 
 // $doctor = $_SESSION['dname'];
@@ -21,34 +23,21 @@ if(isset($_GET['cancel']))
     if($query)
     {
       echo "<script>alert('Your appointment successfully cancelled');</script>";
-    }
-  }
-
-  // if(isset($_GET['prescribe'])){
+      echo "<script>window.location.href = 'doctor-panel.php';</script>";
     
-  //   $pid = $_GET['pid'];
-  //   $ID = $_GET['ID'];
-  //   $appdate = $_GET['appdate'];
-  //   $apptime = $_GET['apptime'];
-  //   $disease = $_GET['disease'];
-  //   $allergy = $_GET['allergy'];
-  //   $prescription = $_GET['prescription'];
-  //   $query=mysqli_query($con,"insert into prestb(doctor,pid,ID,appdate,apptime,disease,allergy,prescription) values ('$doctor',$pid,$ID,'$appdate','$apptime','$disease','$allergy','$prescription');");
-  //   if($query)
-  //   {
-  //     echo "<script>alert('Prescribed successfully!');</script>";
-  //   }
-  //   else{
-  //     echo "<script>alert('Unable to process your request. Try again!');</script>";
-  //   }
-  // }
+  }
+}
 
-
+if(isset($_GET['accept'])) {
+  $query=mysqli_query($con,"update appointmenttb set doctorStatus='2' where ID = '".$_GET['ID']."'");
+  if($query) {
+    echo "<script>alert('Appointment successfully accepted');</script>";
+    echo "<script>window.location.href = 'doctor-panel.php';</script>";
+  }
+}
 ?>
 <html lang="en">
   <head>
-
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -58,9 +47,7 @@ if(isset($_GET['cancel']))
     <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <a class="navbar-brand" href="#">  Advanced Patient Care Solution </a>
@@ -108,8 +95,8 @@ if(isset($_GET['cancel']))
 </nav>
   </head>
   <style type="text/css">
-    button:hover{cursor:pointer;}
-    #inputbtn:hover{cursor:pointer;}
+    button:hover { cursor: pointer; }
+    #inputbtn:hover { cursor: pointer; }
   </style>
   <body style="padding-top:50px;">
    <div class="container-fluid" style="margin-top:50px;">
@@ -192,7 +179,6 @@ if(isset($_GET['cancel']))
                     <th scope="col">Current Status</th>
                     <th scope="col">Action</th>
                     <th scope="col">Prescribe</th>
-
                   </tr>
                 </thead>
                 <tbody>
@@ -203,9 +189,9 @@ if(isset($_GET['cancel']))
                     $query = "select pid,ID,fname,lname,gender,email,contact,appdate,apptime,userStatus,doctorStatus from appointmenttb where doctor='$dname';";
                     $result = mysqli_query($con,$query);
                     while ($row = mysqli_fetch_array($result)){
-                      ?>
+                  ?>
                       <tr>
-                      <td><?php echo $row['pid'];?></td>
+                        <td><?php echo $row['pid'];?></td>
                         <td><?php echo $row['ID'];?></td>
                         <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['fname'];?></td>
                         <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['lname'];?></td>
@@ -214,64 +200,61 @@ if(isset($_GET['cancel']))
                         <td><?php echo $row['contact'];?></td>
                         <td  ><?php echo $row['appdate'];?></td>
                         <td><?php echo $row['apptime'];?></td>
-              <td>
-                    <?php         //current status  
-                            if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
-                    {
-                      echo "Active";
-                    }
-                    if(($row['userStatus']==0) && ($row['doctorStatus']==1))  
-                    {
-                      echo "Cancelled by Patient";
-                    }
-
-                    if(($row['userStatus']==1) && ($row['doctorStatus']==0))  
-                    {
-                      echo "Cancelled by You";
-                    }
-                        ?></td>
-        
-                     <td>
-                        <?php         //action 
-                                if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
-                        { ?>
-
-													
-	                        <a href="doctor-panel.php?ID=<?php echo $row['ID']?>&cancel=update" 
+                        <td>
+                          <?php 
+                            if(($row['userStatus']==1) && ($row['doctorStatus']==1)) {
+                              echo "Active";
+                            } elseif(($row['userStatus']==0) && ($row['doctorStatus']==1)) {
+                              echo "Cancelled by Patient";
+                            } elseif(($row['userStatus']==1) && ($row['doctorStatus']==0)) {
+                              echo "Cancelled by You";
+                            } elseif(($row['doctorStatus']==2)) {
+                              echo "Accepted by You";
+                            }
+                          ?>
+                        </td>
+                        <td>
+                          <?php if(($row['userStatus']==1) && ($row['doctorStatus']==1)) { ?>
+                            <a href="doctor-panel.php?ID=<?php echo $row['ID']?>&cancel=update" 
                               onClick="return confirm('Are you sure you want to cancel this appointment ?')"
-                              title="Cancel Appointment" tooltip-placement="top" tooltip="Remove"><button class="btn btn-danger">Cancel</button></a>
-	                        <?php } else {
-
-                                echo "Cancelled";
-                                } ?>
-                        
+                              title="Cancel Appointment" tooltip-placement="top" tooltip="Remove">
+                              <button class="btn btn-danger">Cancel</button>
+                            </a>
+                            <a href="doctor-panel.php?ID=<?php echo $row['ID']?>&accept=update" 
+                              onClick="return confirm('Are you sure you want to accept this appointment ?')"
+                              title="Accept Appointment" tooltip-placement="top" tooltip="Accept">
+                              <button class="btn btn-success">Accept</button>
+                            </a>
+                          <?php } elseif($row['doctorStatus']==2) {
+                              echo "Accepted";
+                            } elseif($row['doctorStatus']==0) {
+                              echo "Cancelled";
+                            } else {
+                              echo "Cancelled";
+                            }
+                          ?>
                         </td>
-                                
-                                 <td>
-
-                        <?php      //prescribe     // if patient cancel the appointment then patientStatus=0, if doctor cancel the appointment then doctorStatus=0
-
-                              if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
-                        { ?>
-
-                        <a href="prescribe.php?pid=<?php echo $row['pid']?>&ID=<?php echo $row['ID']?>&fname=<?php echo $row['fname']?>&lname=<?php echo $row['lname']?>&appdate=<?php echo $row['appdate']?>&apptime=<?php echo $row['apptime']?>"
-                        tooltip-placement="top" tooltip="Remove" title="prescribe">
-                        <button class="btn btn-success">Prescibe</button></a>
-                        <?php }
-                          // elseif(($row['userStatus']==1) && ($row['doctorStatus']==1 )&&($row['prescribeStatus']==1))
-                          // {
-                          //   echo "Completed";
-                          // }
-                        else {
-
-                            echo "-";
-                            } ?>
-                        
+                        <td>
+                          <?php 
+                            $prescriptionQuery = mysqli_query($con, "SELECT * FROM prestb WHERE ID = '".$row['ID']."'");
+                            if ($row['doctorStatus'] == 2) {
+                              if (mysqli_num_rows($prescriptionQuery) == 0 && ($row['userStatus'] == 1)) { 
+                          ?>
+                                <a href="prescribe.php?pid=<?php echo $row['pid']?>&ID=<?php echo $row['ID']?>&fname=<?php echo $row['fname']?>&lname=<?php echo $row['lname']?>&appdate=<?php echo $row['appdate']?>&apptime=<?php echo $row['apptime']?>"
+                                  tooltip-placement="top" tooltip="Remove" title="prescribe">
+                                  <button class="btn btn-success" id="prescribe-btn-<?php echo $row['ID']?>" onclick="hideButton(<?php echo $row['ID']?>)">Prescribe</button>
+                                </a>
+                          <?php 
+                              } else {
+                                echo "Prescription Sent";
+                              }
+                            } else {
+                              echo "-";
+                            }
+                          ?>
                         </td>
-
-
-                      </tr></a>
-                    <?php } ?>
+                      </tr>
+                  <?php } ?>
                 </tbody>
               </table>
         <br>
@@ -283,9 +266,7 @@ if(isset($_GET['cancel']))
         <table class="table table-hover">
                 <thead>
                   <tr>
-                    
                     <th scope="col">Patient ID</th>
-                    
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Appointment ID</th>
@@ -298,18 +279,13 @@ if(isset($_GET['cancel']))
                 </thead>
                 <tbody>
                   <?php 
-
                     $con=mysqli_connect("localhost","root","","myhmsdb");
                     global $con;
-
-                    $query = "select pid,fname,lname,ID,appdate,apptime,disease,allergy,prescription from prestb where doctor='$doctor';";
-                    
+                    $query = "select pid,fname,lname,ID,appdate,apptime,disease,allergy,prescription from prestb where doctor='$dname';";
                     $result = mysqli_query($con,$query);
                     if(!$result){
                       echo mysqli_error($con);
                     }
-                    
-
                     while ($row = mysqli_fetch_array($result)){
                   ?>
                       <tr>
@@ -317,7 +293,6 @@ if(isset($_GET['cancel']))
                         <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['fname'];?></td>
                         <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['lname'];?></td>
                         <td><?php echo $row['ID'];?></td>
-                        
                         <td><?php echo $row['appdate'];?></td>
                         <td><?php echo $row['apptime'];?></td>
                         <td style="min-width: 105px; max-width: 105px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['disease'];?></td>
@@ -325,91 +300,36 @@ if(isset($_GET['cancel']))
                         <td style="min-width: 250px; max-width: 250px;  word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><?php echo $row['prescription'];?></td>
                     
                       </tr>
-                    <?php }
-                    ?>
+                  <?php } ?>
                 </tbody>
               </table>
-      </div>
-
-
-
-
-      <div class="tab-pane fade" id="list-app" role="tabpanel" aria-labelledby="list-pat-list">
-        
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Doctor Name</th>
-                    <th scope="col">Consultancy Fees</th>
-                    <th scope="col">Appointment Date</th>
-                    <th scope="col">Appointment Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php 
-
-                    $con=mysqli_connect("localhost","root","","myhmsdb");
-                    global $con;
-
-                    $query = "select * from appointmenttb;";
-                    $result = mysqli_query($con,$query);
-                    while ($row = mysqli_fetch_array($result)){
-              
-                      #$fname = $row['fname'];
-                      #$lname = $row['lname'];
-                      #$email = $row['email'];
-                      #$contact = $row['contact'];
-                  ?>
-                      <tr>
-                        <td><?php echo $row['fname'];?></td>
-                        <td><?php echo $row['lname'];?></td>
-                        <td><?php echo $row['email'];?></td>
-                        <td><?php echo $row['contact'];?></td>
-                        <td><?php echo $row['doctor'];?></td>
-                        <td><?php echo $row['docFees'];?></td>
-                        <td><?php echo $row['appdate'];?></td>
-                        <td><?php echo $row['apptime'];?></td>
-                      </tr>
-                    <?php } ?>
-                </tbody>
-              </table>
-        <br>
-      </div>
-
-
-
-
-
-      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
-      <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-        <form class="form-group" method="post" action="admin-panel1.php">
-          <div class="row">
+            </div>
+            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+              <form class="form-group" method="post" action="admin-panel1.php">
+                <div class="row">
                   <div class="col-md-4"><label>Doctor Name:</label></div>
                   <div class="col-md-8"><input type="text" class="form-control" name="doctor" required></div><br><br>
                   <div class="col-md-4"><label>Password:</label></div>
-                  <div class="col-md-8"><input type="password" class="form-control"  name="dpassword" required></div><br><br>
+                  <div class="col-md-8"><input type="password" class="form-control" name="dpassword" required></div><br><br>
                   <div class="col-md-4"><label>Email ID:</label></div>
-                  <div class="col-md-8"><input type="email"  class="form-control" name="demail" required></div><br><br>
+                  <div class="col-md-8"><input type="email" class="form-control" name="demail" required></div><br><br>
                   <div class="col-md-4"><label>Consultancy Fees:</label></div>
-                  <div class="col-md-8"><input type="text" class="form-control"  name="docFees" required></div><br><br>
+                  <div class="col-md-8"><input type="text" class="form-control" name="docFees" required></div><br><br>
                 </div>
-          <input type="submit" name="docsub" value="Add Doctor" class="btn btn-primary">
-        </form>
+                <input type="submit" name="docsub" value="Add Doctor" class="btn btn-primary">
+              </form>
+            </div>
+            <div class="tab-pane fade" id="list-attend" role="tabpanel" aria-labelledby="list-attend-list">...</div>
+          </div>
+        </div>
       </div>
-       <div class="tab-pane fade" id="list-attend" role="tabpanel" aria-labelledby="list-attend-list">...</div>
     </div>
-  </div>
-</div>
-   </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.1/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.1/sweetalert2.all.min.js"></script>
   </body>
 </html>

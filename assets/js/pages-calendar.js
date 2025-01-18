@@ -1,162 +1,185 @@
-var Calendar = function() {"use strict";
-	var dateToShow, calendar, demoCalendar, eventClass, eventCategory, subViewElement, subViewContent, $eventDetail;
-	var defaultRange = new Object;
-	defaultRange.start = moment();
-	defaultRange.end = moment().add(1, 'days');
-	//Calendar
-	var setFullCalendarEvents = function() {
-		var date = new Date();
-		dateToShow = date;
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
+var Calendar = function() {
+    "use strict";
+    var dateToShow, calendar, demoCalendar, eventClass, eventCategory, subViewElement, subViewContent, $eventDetail;
+    var defaultRange = new Object;
+    defaultRange.start = moment();
+    defaultRange.end = moment().add(1, 'days');
 
-		demoCalendar = [{
-			title: 'Networking',
-			start: new Date(y, m, d, 20, 0),
-			end: new Date(y, m, d, 21, 0),
-			className: 'event-job',
-			category: 'job',
-			allDay: false,
-			content: 'Out to design conference'
-		}, {
-			title: 'Bootstrap Seminar',
-			start: new Date(y, m, d - 5),
-			end: new Date(y, m, d - 2),
-			className: 'event-off-site-work',
-			category: 'off-site-work',
-			allDay: true
-		}, {
-			title: 'Lunch with Nicole',
-			start: new Date(y, m, d - 3, 12, 0),
-			end: new Date(y, m, d - 3, 12, 30),
-			className: 'event-generic',
-			category: 'generic',
-			allDay: false
-		}, {
-			title: 'Corporate Website Redesign',
-			start: new Date(y, m, d + 5),
-			end: new Date(y, m, d + 10),
-			className: 'event-to-do',
-			category: 'to-do',
-			allDay: true
-		}];
-	};
-	//function to initiate Full Calendar
-	var runFullCalendar = function() {
-		$(".add-event").off().on("click", function() {
-			eventInputDateHandler();
-			$(".form-full-event #event-id").val("");
-			$('.events-modal').modal();
-		});
-		$('.events-modal').on('hide.bs.modal', function(event) {
-			$(".form-full-event #event-id").val("");
-			$(".form-full-event #event-name").val("");
-			$(".form-full-event #start-date-time").val("").data("DateTimePicker").destroy();
-			$(".form-full-event #end-date-time").val("").data("DateTimePicker").destroy();
-			$(".event-categories[value='job']").prop('checked', true);
-		});
+    // Calendar events setup
+    var setFullCalendarEvents = function() {
+        var date = new Date();
+        dateToShow = date;
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
 
-		$('#event-categories div.event-category').each(function() {
-			// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-			// it doesn't need to have a start or end
-			var eventObject = {
-				title: $.trim($(this).text()) // use the element's text as the event title
-			};
-			// store the Event Object in the DOM element so we can get to it later
-			$(this).data('eventObject', eventObject);
-			// make the event draggable using jQuery UI
-			$(this).draggable({
-				zIndex: 999,
-				revert: true, // will cause the event to go back to its
-				revertDuration: 50 //  original position after the drag
-			});
-		});
-		/* initialize the calendar
-		 -----------------------------------------------------------------*/
-		var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-		var form = '';
-		$('#full-calendar').fullCalendar({
-			buttonIcons: {
-				prev: 'fa fa-chevron-left',
-				next: 'fa fa-chevron-right'
-			},
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-			},
-			events: demoCalendar,
-			editable: true,
-			eventLimit: true, // allow "more" link when too many events
-			droppable: true, // this allows things to be dropped onto the calendar !!!
-			drop: function(date, allDay) {// this function is called when something is dropped
+        demoCalendar = [{
+            title: 'Networking',
+            start: new Date(y, m, d, 20, 0),
+            end: new Date(y, m, d, 21, 0),
+            className: 'event-job',
+            category: 'job',
+            allDay: false,
+            content: 'Out to design conference'
+        }, {
+            title: 'Bootstrap Seminar',
+            start: new Date(y, m, d - 5),
+            end: new Date(y, m, d - 2),
+            className: 'event-off-site-work',
+            category: 'off-site-work',
+            allDay: true
+        }, {
+            title: 'Lunch with Nicole',
+            start: new Date(y, m, d - 3, 12, 0),
+            end: new Date(y, m, d - 3, 12, 30),
+            className: 'event-generic',
+            category: 'generic',
+            allDay: false
+        }, {
+            title: 'Corporate Website Redesign',
+            start: new Date(y, m, d + 5),
+            end: new Date(y, m, d + 10),
+            className: 'event-to-do',
+            category: 'to-do',
+            allDay: true
+        }];
+    };
 
-				// retrieve the dropped element's stored Event Object
-				var originalEventObject = $(this).data('eventObject');
+    // Initialize FullCalendar
+    var runFullCalendar = function() {
+        $(".add-event").off().on("click", function() {
+            eventInputDateHandler();
+            $(".form-full-event #event-id").val("");
+            $('.events-modal').modal();
+        });
+        
+        $('.events-modal').on('hide.bs.modal', function(event) {
+            $(".form-full-event #event-id").val("");
+            $(".form-full-event #event-name").val("");
+            $(".form-full-event #start-date-time").val("").data("DateTimePicker").destroy();
+            $(".form-full-event #end-date-time").val("").data("DateTimePicker").destroy();
+            $(".event-categories[value='job']").prop('checked', true);
+        });
 
+<<<<<<< HEAD
 				var $category = $(this).attr('data-class');
 
 				// we need to copy it, so that multiple events don't have a reference to the same object
+=======
+        $('#event-categories div.event-category').each(function() {
+            var eventObject = {
+                title: $.trim($(this).text())
+            };
+            $(this).data('eventObject', eventObject);
+            $(this).draggable({
+                zIndex: 999,
+                revert: true,
+                revertDuration: 50
+            });
+        });
+>>>>>>> MasterMain
 
-				var newEvent = new Object;
-				newEvent.title = originalEventObject.title;
-				newEvent.start = new Date(date);
-				newEvent.end = moment(new Date(date)).add(1, 'hours');
-				newEvent.allDay = true;
-				newEvent.category = $category;
-				newEvent.className = 'event-' + $category;
+        $('#full-calendar').fullCalendar({
+            buttonIcons: {
+                prev: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right'
+            },
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: demoCalendar,
+            editable: true,
+            eventLimit: true,
+            droppable: true,
+            dayRender: function(date, cell) {
+                if (date.isBefore(moment(), 'day')) {
+                    cell.addClass('fc-disabled');
+                    cell.css('background-color', '#e9ecef');
+                }
+            },
+            drop: function(date, allDay) {
+                if (date.isBefore(moment())) {
+                    alert("Cannot drop events on past dates.");
+                    return;
+                }
 
-				$('#full-calendar').fullCalendar('renderEvent', newEvent, true);
+                var originalEventObject = $(this).data('eventObject');
+                var $category = $(this).attr('data-class');
 
-				// is the "remove after drop" checkbox checked?
-				if($('#drop-remove').is(':checked')) {
-					// if so, remove the element from the "Draggable Events" list
-					$(this).remove();
-				}
-			},
-			selectable: true,
-			selectHelper: true,
-			select: function(start, end, allDay) {
-				eventInputDateHandler();
-				$(".form-full-event #event-id").val("");
-				$(".form-full-event #event-name").val("");
-				$(".form-full-event #start-date-time").data("DateTimePicker").date(moment(start));
-				$(".form-full-event #end-date-time").data("DateTimePicker").date(moment(start).add(1, 'hours'));
-				$(".event-categories[value='job']").prop('checked', true);
-				$('.events-modal').modal();
-			},
-			eventClick: function(calEvent, jsEvent, view) {
-				eventInputDateHandler();
-				var eventId = calEvent._id;
-				for(var i = 0; i < demoCalendar.length; i++) {
+                var newEvent = new Object;
+                newEvent.title = originalEventObject.title;
+                newEvent.start = new Date(date);
+                newEvent.end = moment(new Date(date)).add(1, 'hours');
+                newEvent.allDay = true;
+                newEvent.category = $category;
+                newEvent.className = 'event-' + $category;
 
-					if(demoCalendar[i]._id == eventId) {
-						$(".form-full-event #event-id").val(eventId);
-						$(".form-full-event #event-name").val(demoCalendar[i].title);
-						$(".form-full-event #start-date-time").data("DateTimePicker").date(moment(demoCalendar[i].start));
-						$(".form-full-event #end-date-time").data("DateTimePicker").date(moment(demoCalendar[i].end));
-						if(demoCalendar[i].category == "" || typeof demoCalendar[i].category == "undefined") {
-							eventCategory = "Generic";
-						} else {
-							eventCategory = demoCalendar[i].category;
-						}
+                $('#full-calendar').fullCalendar('renderEvent', newEvent, true);
 
-						$(".event-categories[value='" + eventCategory + "']").prop('checked', true);
+                if ($('#drop-remove').is(':checked')) {
+                    $(this).remove();
+                }
+            },
+            selectable: true,
+            selectHelper: true,
+            select: function(start, end, allDay) {
+                if (start.isBefore(moment())) {
+                    alert("Past dates cannot be selected.");
+                    $('#full-calendar').fullCalendar('unselect');
+                    return;
+                }
+                eventInputDateHandler();
+                $(".form-full-event #event-id").val("");
+                $(".form-full-event #event-name").val("");
+                $(".form-full-event #start-date-time").data("DateTimePicker").date(moment(start));
+                $(".form-full-event #end-date-time").data("DateTimePicker").date(moment(start).add(1, 'hours'));
+                $(".event-categories[value='job']").prop('checked', true);
+                $('.events-modal').modal();
+            },
+            eventClick: function(calEvent, jsEvent, view) {
+                eventInputDateHandler();
+                var eventId = calEvent._id;
+                for (var i = 0; i < demoCalendar.length; i++) {
+                    if (demoCalendar[i]._id == eventId) {
+                        $(".form-full-event #event-id").val(eventId);
+                        $(".form-full-event #event-name").val(demoCalendar[i].title);
+                        $(".form-full-event #start-date-time").data("DateTimePicker").date(moment(demoCalendar[i].start));
+                        $(".form-full-event #end-date-time").data("DateTimePicker").date(moment(demoCalendar[i].end));
+                        if (demoCalendar[i].category == "" || typeof demoCalendar[i].category == "undefined") {
+                            eventCategory = "Generic";
+                        } else {
+                            eventCategory = demoCalendar[i].category;
+                        }
+                        $(".event-categories[value='" + eventCategory + "']").prop('checked', true);
+                    }
+                }
+                $('.events-modal').modal();
+            }
+        });
 
-					}
-				}
-				$('.events-modal').modal();
-			}
-		});
-		demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
-	};
+        demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
+    };
 
-	var runFullCalendarValidation = function(el) {
+    var eventInputDateHandler = function() {
+        var startInput = $('#start-date-time');
+        var endInput = $('#end-date-time');
+        startInput.datetimepicker({
+            minDate: moment()
+        });
+        endInput.datetimepicker({
+            minDate: moment()
+        });
+        startInput.on("dp.change", function(e) {
+            endInput.data("DateTimePicker").minDate(e.date);
+        });
+        endInput.on("dp.change", function(e) {
+            startInput.data("DateTimePicker").maxDate(e.date);
+        });
+    };
 
+<<<<<<< HEAD
 		var formEvent = $('.form-full-event');
 
 		formEvent.validate({
@@ -255,3 +278,12 @@ var Calendar = function() {"use strict";
 		}
 	};
 }();
+=======
+    return {
+        init: function() {
+            setFullCalendarEvents();
+            runFullCalendar();
+        }
+    };
+}();
+>>>>>>> MasterMain

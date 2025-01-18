@@ -65,12 +65,14 @@ include("header.php");
 
          <div class="col-md-7" style="padding-left: 10%; ">
                  <div style="-webkit-animation: mover 2s infinite alternate;
+
     animation: mover 1s infinite alternate; width: 30%;padding-left: 0px;margin-top: 18%;margin-left: 13%;margin-bottom:1%">
           <img style="width:200px; height: 200px;" src="assets/images/apcs8.png" alt="ACPS logo"/>
       </div>
 
      <div style="color: white;">
             <h4 style="font-family: 'IBM Plex Sans', sans-serif;">Caring for You, Anytime, Anywhere.</h4>
+
           </div>
 
          </div>

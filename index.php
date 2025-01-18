@@ -78,9 +78,11 @@ function checklen()
 
 <div class="container register" style="font-family: 'IBM Plex Sans', sans-serif;">
                 <div class="row">
+
                     <div class="col-md-3 register-left" style="margin-top: 11%; right: 12%">
                         <img style="width:200px; height: 200px;" src="assets/images/apcs7.png" alt="ACPS logo"/>
                         
+
                        
                     </div>
                     <div class="col-md-9 register-right" style="margin-top:40px; left: -60px;">
@@ -205,4 +207,5 @@ function checklen()
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     </html>
 
+  
   
