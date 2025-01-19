@@ -269,6 +269,9 @@ if (mysqli_num_rows($newAppointmentsQuery) > 0) {
                         echo "Accepted";
                       } elseif ($row['doctorStatus'] == 0) {
                         echo "Cancelled";
+                      }
+                      elseif ($row['doctorStatus'] == 3) {
+                        echo "Prescribed";
                       } else {
                         echo "Cancelled";
                       }

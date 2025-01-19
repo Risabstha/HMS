@@ -653,7 +653,7 @@
                         } elseif (($row['doctorStatus'] == 2)) {
                           echo "Accepted by Doctor";
                         } else {
-                          echo "Pending";
+                          echo "-";
                         }
                         ?>
                       </td>
@@ -669,9 +669,13 @@
                           </a>
                         <?php
                         } elseif ($row['doctorStatus'] == 2) {
-                          echo ""; // Show nothing when accepted by the doctor
-                        } else {
-                          echo "Cancelled";
+                          echo "Accepted by doctor"; // Show this when accepted by the doctor
+                        }
+                          elseif($row['doctorStatus'] == 3) {
+                            echo "Prescribed by doctor"; 
+                          } 
+                        else {
+                          echo "-";
                         }
                         ?>
                       </td>
