@@ -49,7 +49,7 @@ if (isset($_POST['docsub1'])) {
   <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-c fixed-top">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <a class="navbar-brand" href="#"> Advanced Patient Care Solution </a>
@@ -76,7 +76,7 @@ if (isset($_POST['docsub1'])) {
     </script>
 
     <style>
-      .bg-primary {
+      .bg-c {
         background: -webkit-linear-gradient(left, #522258, #D95F59);
       }
 
