@@ -293,7 +293,7 @@
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
@@ -358,7 +358,21 @@
 
     #inputbtn:hover {
       cursor: pointer;
+    } 
+    .chatbotimage{
+      width: 80px;
+      height: 80px;
+      position: fixed;    bottom: 60px;   right: 60px;
     }
+    .chatbotimage:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease-in-out;
+}
+
+    .chatbotdescription1{
+      position: fixed;    bottom: 18px;   right: 68px;
+    }
+
   </style>
 
   <body style="padding-top:50px;">
@@ -762,8 +776,8 @@
         </div>
       </div>
     </div>
-    <a href="run_python.php" target="_blank">Run Python Script</a>
-
+    <a href="run_python.php"  target="_blank"><img src="assets/images/chatbot.png" class="chatbotimage" alt="Description" title="Click here for Disease Prediction Chatbot!" ></a>
+    <p class="chatbotdescription1">Chatbot</p>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
